@@ -30,7 +30,7 @@ xaringanExtra::style_share_again(
 
 ```{r xaringan-logo, echo=FALSE}
 xaringanExtra::use_logo(
-  image_url = "https://raw.githubusercontent.com/CenterForAssessment/NCME_2022_Demonstration/main/Presentations/cfa_assets/img/CFA_Logo.svg", # could be local if copied to `libs`
+  image_url = "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo.svg", # could be local if copied to `libs`
   width = "86px",
   height = "100px",
   position = xaringanExtra::css_position(top = "0.5em", right = "0.5em"),
