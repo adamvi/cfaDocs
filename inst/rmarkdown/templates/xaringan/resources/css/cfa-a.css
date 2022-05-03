@@ -1,12 +1,12 @@
 :root {
 /* COLOR VARIABLES */
 /* primary and secondary colors and variants */
---cfa-primary:            #121824; /* primary color */
---cfa-green:              #199919;
+--cfa-primary: #121824; /* primary color */
+--cfa-green:   #199919;
 
---inverse-text:           #eeeeef;
---inverse-bkgd:           #5c5c5a;
---inverse-brdr:           #24ca6133;
+--inverse-text: #eeeeef;
+--inverse-bkgd: #5c5c5a;
+--inverse-brdr: #24ca6133;
 
 --code-text: rgba(169, 5, 51, 1);
 }
@@ -56,7 +56,7 @@
 /* turns off slide numbers for title page: */
 /* https://github.com/gnab/remark/issues/298 */
 .title-slide .remark-slide-number {
-  display:           none;
+  display: none;
 }
 
 .title h1 {
@@ -148,11 +148,11 @@ h2:not(div.subtitle > h2), h3:not(div.author > h3, div.institute > h3, div.date 
 
 /*-- HORIZONTAL BARS --*/
 hr {
-  content:            '';
-  display:            block;
-  border:             none;
-  background-color:   var(--cfa-green);
-  height:             0.08em;
+  content: '';
+  display: block;
+  border:  none;
+  background-color: var(--cfa-green);
+  height:  0.08em;
 }
 
 /*-- TABLES -- */
@@ -174,19 +174,19 @@ hr {
 
 /*-- Footnote --*/
 .footnote {
-  position:           absolute;
-  bottom:             2em;
-  padding-right:      4em;
-  font-size:          75%;
-  line-height:        1em;
+  position: absolute;
+  bottom: 2em;
+  padding-right: 4em;
+  font-size: 75%;
+  line-height: 1em;
 }
 
 /*-- Persistent link in footer --*/
 /* https://github.com/rstudio-education/teaching-in-production/blob/master/slides/assets/css/my-theme.css */
 
 div.footer {
-  position:         absolute;
-  bottom:           3%;
+  position: absolute;
+  bottom: 3%;
 }
 
 a.footer {
@@ -213,19 +213,19 @@ a.footer:hover {
 
 /*-- In-line highlighting within text --*/
 .remark-code, .remark-inline-code {
-  font-family:        'Source Code Pro', monospace;
-  font-weight:        400;
-  color:              var(--code-text);
-  border-radius:      5px;
-  background-color:   #f4f4f4;
-  padding:            0.5px 0.5px 0.5px 0.5px;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 400;
+  color: var(--code-text);
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  padding: 0.5px 0.5px 0.5px 0.5px;
 }
 
 /*-- CODE CHUNKS --*/
 
 pre code {
-  font-family:        'Source Code Pro', monospace;
-  line-height:        1.75em;
+  font-family: 'Source Code Pro', monospace;
+  line-height: 1.75em;
 }
 
 
@@ -233,23 +233,23 @@ pre code {
 
 /*-- Slide layout --*/
 .pull-left {
-  float:             left;
-  width:             40%;
+  float: left;
+  width: 40%;
 }
 
 .pull-right {
-  float:            right;
-  width:            55%;
+  float: right;
+  width: 55%;
 }
 
 .pull-left-equal {
-  float:            left;
-  width:            50%;
+  float: left;
+  width: 50%;
 }
 
 .pull-right-equal {
-  float:            right;
-  width:            50%;
+  float: right;
+  width: 50%;
 }
 
 .pull-right-equal + * {
