@@ -1,0 +1,129 @@
+#' @title Xaringan output format for the Center for Assessment
+#'
+#' @description Function to render xaringan/remark.js presentation slides using custom templates and themes.
+#'   This output format produces an HTML file that contains the Markdown source (knitted from R Markdown) and
+#'   JavaScript code to render slides.
+#'
+#' @param theme Name of CSS based theme for slides (length 1). Alternatively `NULL` with `css` argument specified Default: 'cfa-a'
+#' @param theme_copy Boolean - should the theme assets be copied to users xaringan built-in themes, Default: TRUE
+#' @param include features to include, such as custom CfA footer and a preset list of xaringanExtra add-ins. 
+#'   Default: list(footer = "default", xaringanExtra = "default", xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard"))
+#' @param css Optional file paths to css assets (`theme` must be NULL if used). Users can also provide a mix of css
+#'   from multiple themes using a specific file path convention, e.g. `c("**/cfa-a.css", "**/cfa-b-fonts.css")`. Default: NULL
+#' @param extras A named list of extra resources to be copied to the `lib_dir`, e.g. `list(fig = "cfa_assets/fig")` 
+#'   (or in Rmd YAML as `extras: !expr list(fig = 'cfa_assets/fig')` for figures placed in Rmd directly with <img> tag). Default: list()
+#' @param lib_dir Directory name of external/custom resources to be copied into (e.g. xaringanExtra js/css dependencies). Default: 'libs'
+#' @param asset_dir Directory name of custom resource location. Assumes subdirectories with names "css", "img", or as given in `extras`. Default: 'cfa_assets'
+#' @param ... Additional arguments passed to `xaringan::moon_reader`
+#' @return HTML slide presentation.
+#' @details Slides are formatted with any combination of CfA based themes
+#'
+#' @seealso 
+#'  \code{\link[htmltools]{htmlDependency}}, \code{\link[htmltools]{copyDependencyToDir}}
+#'  \code{\link[rmarkdown]{render}}, \code{\link[rmarkdown]{includes}}
+#'  \code{\link[R.utils]{copyDirectory}}
+#'  \code{\link[xaringan]{moon_reader}}
+#' @references \url{https://github.com/yihui/xaringan/wiki}
+#' @rdname cfaXaringan
+#' @author Adam Van Iwaarden
+#' @keywords documentation presentations
+#' @importFrom htmltools htmlDependency copyDependencyToDir
+#' @importFrom rmarkdown render includes
+#' @importFrom R.utils copyDirectory
+#' @importFrom xaringan moon_reader
+#' @export
+cfaXaringan <- function(
+  theme = "cfa-a",
+  theme_copy = TRUE,
+  include = list(footer = "default", xaringanExtra = "default", xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard")),
+  css = NULL,
+  extras = list(),
+  lib_dir = "libs",
+  asset_dir = "cfa_assets",
+  ...
+  ) {
+  # check arguments
+  if (!is.null(theme) & !is.null(css)) stop("Specify either `theme` or `css`, but not both.")
+  # need to remove old 'libs' directory or xaringanExtra paths get messed up.
+  if (dir.exists(lib_dir)) unlink(lib_dir, recursive = TRUE)
+
+  if (!is.null(theme)) {
+    # Check css
+    css_dir <- pkg_resource("css")
+    theme.css <- grep(paste(theme, collapse = "|"), list.files(css_dir), value = TRUE)
+
+    if (theme_copy) {
+      copyResources(resources=theme.css)
+      theme.css <- gsub("[.](?:sa|sc|c)ss$", "", theme.css)
+    } else {
+      theme_css <- if (length(theme.css)) {
+        if (is.null(check_builtin_css(theme))) {
+          htmltools::htmlDependency(
+            "css", "0.0.1", css_dir,
+            stylesheet = theme.css,
+            all_files = FALSE
+          )
+        }
+      }
+      if (!dir.exists(new_dir <- file.path(lib_dir, asset_dir, "css"))) 
+        dir.create(new_dir, recursive = TRUE)
+      # assign to css.cp to suppress output.
+      css.cp <- htmltools::copyDependencyToDir(theme_css, file.path(lib_dir, asset_dir), mustWork = TRUE)
+      theme.css <- file.path(new_dir, theme.css)
+    }
+  } else {
+    # allow user to mix and match cfa theme assets
+    theme.css <- gsub("^\\*\\*", pkg_resource("css"), css)
+    theme_css <- htmltools::htmlDependency(
+      "css", "0.0.1", dirname(theme.css),
+      stylesheet = basename(theme.css),
+      all_files = FALSE
+    )
+    if (!dir.exists(new_dir <- file.path(lib_dir, asset_dir, "css"))) 
+      dir.create(new_dir, recursive = TRUE)
+    css.cp <- htmltools::copyDependencyToDir(theme_css, file.path(lib_dir, asset_dir), mustWork = TRUE)
+    theme.css <- file.path(new_dir, basename(theme.css))
+  }
+
+  #  Things like figures placed directly with <img>, assets without a http url (local only), etc. 
+  if (length(extras)) {
+    for (asset in 1:length(extras)) {
+      tmp_dir <- extras[[asset]]
+      if (!dir.exists(new_dir <- file.path(lib_dir, asset_dir, names(extras)[asset]))) 
+        dir.create(new_dir, recursive = TRUE)
+      tmp.cp <- file.copy(list.files(tmp_dir, full.names = TRUE), new_dir, overwrite = TRUE)
+    }
+  }
+
+  if (length(include)) {
+    if (length(include[["footer"]])) {
+      if (include[["footer"]] == "default")
+        include[["footer"]] <- pkg_resource("rmd/cfa-footer.md")
+    }
+    if (length(include[["xaringanExtra"]])) {
+      if (include[["xaringanExtra"]] == "default")
+        include[["xaringanExtra"]] <- pkg_resource("rmd/cfa-xaringanExtra.Rmd")
+      if (!dir.exists(tmp_libdir <- file.path(dirname(include[["xaringanExtra"]]), lib_dir)))
+        dir.create(tmp_libdir, recursive = TRUE)
+      xExtra_header <- file.path(lib_dir, "xaringanExtra.html")
+      params <- list(xExtra_use = include[["xExtra_use"]])
+      tmp.xE <- rmarkdown::render(include[["xaringanExtra"]], output_file = xExtra_header)
+      R.utils::copyDirectory(tmp_libdir, lib_dir)
+      unlink(tmp_libdir, recursive = TRUE)
+      tmp_html <- readLines(xExtra_header)
+      tmp_html <- gsub("<script src=\"", paste0("<script src=\"", lib_dir, "/"), tmp_html)
+      tmp_html <- gsub("<link href=\"", paste0("<link href=\"", lib_dir, "/"), tmp_html)
+      writeLines(tmp_html, xExtra_header)
+    }
+  }
+
+  ##  template
+  xaringan::moon_reader(
+    css = theme.css,
+    seal = TRUE,
+    self_contained = FALSE,
+    lib_dir = lib_dir,
+    includes = rmarkdown::includes(in_header = xExtra_header, before_body = include[["footer"]]),
+    ...
+  )
+}
