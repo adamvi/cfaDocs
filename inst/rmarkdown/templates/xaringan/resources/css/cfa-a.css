@@ -14,6 +14,27 @@
 
 /*--------------  SLIDE CONTENT  -------------- */
 
+.github-corner {
+  border-bottom: 0;
+  position: fixed;
+  right: 0;
+  text-decoration: none;
+  top: 0;
+  z-index: 1;
+}
+
+.github-corner:hover .octo-arm {
+  -webkit-animation: octocat-wave 560ms ease-in-out;
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+.github-corner svg {
+  color: var(--cfa-green);
+  fill: var(--cfa-primary);
+  height: 100px;
+  width: 100px;
+}
+
 /*--------------  INVERSE SLIDE MODIFICATIONS  -------------- */
 /*-- Put inverse before title class - title based on .inverse by remark.js --*/
 /*-- https: //github.com/yihui/xaringan/wiki/Title-slide --*/
