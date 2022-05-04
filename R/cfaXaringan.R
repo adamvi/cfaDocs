@@ -87,7 +87,7 @@ cfaXaringan <- function(
 
   #  Things like figures placed directly with <img>, assets without a http url (local only), etc. 
   if (length(extras)) {
-    for (asset in 1:length(extras)) {
+    for (asset in seq_len(length(extras))) {
       tmp_dir <- extras[[asset]]
       if (!dir.exists(new_dir <- file.path(lib_dir, asset_dir, names(extras)[asset]))) 
         dir.create(new_dir, recursive = TRUE)
@@ -105,25 +105,29 @@ cfaXaringan <- function(
         include[["xaringanExtra"]] <- pkg_resource("rmd/cfa-xaringanExtra.Rmd")
       if (!dir.exists(tmp_libdir <- file.path(dirname(include[["xaringanExtra"]]), lib_dir)))
         dir.create(tmp_libdir, recursive = TRUE)
-      xExtra_header <- file.path(lib_dir, "xaringanExtra.html")
+      head_html <- file.path(lib_dir, "add_in_header.html")
       params <- list(xExtra_use = include[["xExtra_use"]])
-      tmp.xE <- rmarkdown::render(include[["xaringanExtra"]], output_file = xExtra_header)
+      tmp.xE <- rmarkdown::render(include[["xaringanExtra"]], output_file = head_html)
       R.utils::copyDirectory(tmp_libdir, lib_dir)
       unlink(tmp_libdir, recursive = TRUE)
-      tmp_html <- readLines(xExtra_header)
+      tmp_html <- readLines(head_html)
       tmp_html <- gsub("<script src=\"", paste0("<script src=\"", lib_dir, "/"), tmp_html)
       tmp_html <- gsub("<link href=\"", paste0("<link href=\"", lib_dir, "/"), tmp_html)
-      writeLines(tmp_html, xExtra_header)
+      tmp_html <- c("<link rel=\"icon\" type=\"image/png\" href=\"https://centerforassessment.github.io/assets/favicon.png\" sizes=\"16x16\">", tmp_html)
+      writeLines(tmp_html, head_html)
     }
+  }
+
+  if (!exists("head_html")) {
+    head_html <- file.path(lib_dir, "add_in_header.html")
+    writeLines("<link rel=\"icon\" type=\"image/png\" href=\"https://centerforassessment.github.io/assets/favicon.png\" sizes=\"16x16\">", head_html)
   }
 
   ##  template
   xaringan::moon_reader(
     css = theme.css,
-    seal = TRUE,
-    self_contained = FALSE,
     lib_dir = lib_dir,
-    includes = rmarkdown::includes(in_header = xExtra_header, before_body = include[["footer"]]),
+    includes = rmarkdown::includes(in_header = head_html, before_body = include[["footer"]]),
     ...
   )
 }
