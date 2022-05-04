@@ -1,12 +1,12 @@
 :root {
 /* COLOR VARIABLES */
 /* primary and secondary colors and variants */
---cfa-primary:  #121824; /* primary color */
---cfa-green:    #29a829;
+--cfa-primary: #121824; /* primary color */
+--cfa-green:   #199919;
 
 --inverse-text: #eeeeef;
---inverse-bkgd: #7d7d7b;
---inverse-brdr: #29a82920;
+--inverse-bkgd: #5c5c5a;
+--inverse-brdr: #24ca6133;
 
 --code-text: rgba(169, 5, 51, 1);
 }
@@ -68,12 +68,8 @@
 .title-slide {
   background-color: white;
   color: var(--cfa-primary);
-  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/nciea-logo-long.svg),
-                    /* url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/cc_logo.svg); */
-                    url(https://mirrors.creativecommons.org/presskit/cc.logo.svg),
-                    url(https://mirrors.creativecommons.org/presskit/icons/by.svg);
-  background-size: 25%, 10%, 2.125%;
-  background-position: top 10% left 10%, bottom 2.5% right 3%, bottom 2.5% right 0.5%;
+  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg);
+  background-size: contain;
   border-right: 150px solid var(--cfa-green);
   height: 250px;
 }
@@ -87,21 +83,17 @@
 .title h1 {
   color: var(--cfa-primary);
   text-shadow: none;
-  margin-top: 125px;
-  margin-right: -50px;
-  line-height: 1em;
-  font-size: 2.5em;
-  font-weight: 400;
+  line-height: 1.25em;
+  font-size: 2em;
+  font-weight: 600;
 }
 
 .subtitle h2 {
   color: var(--cfa-primary);
   text-shadow: none;
   line-height: 1.25em;
-  font-size: 1.5em;
+  font-size: 1.75em;
   font-weight: 400;
-  margin-top: -15px;
-  margin-right: -50px;
 }
 
 .title, .subtitle, .author, .institute, .date {
@@ -136,7 +128,7 @@ a:hover { border-bottom: none; }
 
 
 /*-- PARAGRAPH TEXT --*/
-.remark-slide-content:not(pre, code, .title-slide) {
+.remark-slide-content:not(pre, code) {
   font-size: 1.6rem; /* paragraph text only */
   padding: 1em 3em 1em 3em;
   line-height: 1.5em;
@@ -164,11 +156,13 @@ h2:not(div.subtitle > h2), h3:not(div.author > h3, div.institute > h3, div.date 
   border-bottom: 1.5px solid var(--cfa-green);
 }
 
-.remark-slide-content h2:not(div.subtitle > h2) {
+.remark-slide-content h2 {
+  /*font-size: 35px;*/
   font-size: 1.5em;
 }
 
-.remark-slide-content h3:not(div.author > h3, div.institute > h3, div.date > h3) {
+.remark-slide-content h3 {
+  /*font-size: 30px;*/
   font-size: 1.3em;
 }
 
