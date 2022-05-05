@@ -4,14 +4,14 @@
 #' custom templates and themes. This output format produces an HTML file that contains
 #' the Markdown source (knitted from R Markdown) and JavaScript code to render slides.
 #'
-#' @param theme Name of CSS based theme for slides (length 1). Alternatively \code{NULL}
+#' @param cfa_theme Name of CSS based theme for slides (length 1). Alternatively \code{NULL}
 #'     with \code{css} argument specified Default: 'cfa-a'
 #' @param theme_copy Boolean - should the theme assets be copied to users
 #'     xaringan built-in themes, Default: TRUE
 #' @param include features to include, such as custom CfA footer and a preset list of
 #'     xaringanExtra add-ins. Default: \code{list(footer = "default", xaringanExtra = "default",
 #'     xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard"))}
-#' @param css Optional file paths to css assets (\code{theme} must be NULL if used). Users can
+#' @param css Optional file paths to css assets (\code{cfa_theme} must be NULL if used). Users can
 #'     also provide a mix of css from multiple themes using a specific file path convention,
 #'     e.g. \code{c("**/cfa-a.css", "**/cfa-b-fonts.css")}. Default: NULL
 #' @param extras A named list of extra resources to be copied to the \code{lib_dir}, e.g.
@@ -40,7 +40,7 @@
 #' @importFrom xaringan moon_reader
 #' @export
 cfaXaringan <- function(
-  theme = "cfa-a",
+  cfa_theme = "cfa-a",
   theme_copy = TRUE,
   include = list(
     footer = "default",
@@ -53,14 +53,14 @@ cfaXaringan <- function(
   ...
   ) {
   # check arguments
-  if (!is.null(theme) & !is.null(css)) stop("Specify either `theme` or `css`, but not both.")
+  if (!is.null(cfa_theme) & !is.null(css)) stop("Specify either `cfa_theme` or `css`, but not both.")
   # need to remove old 'libs' directory or xaringanExtra paths get messed up.
   if (dir.exists(lib_dir)) unlink(lib_dir, recursive = TRUE)
 
-  if (!is.null(theme)) {
+  if (!is.null(cfa_theme)) {
     # Check css
     css_dir <- pkg_resource("css")
-    theme.css <- grep(paste(theme, collapse = "|"), list.files(css_dir), value = TRUE)
+    theme.css <- grep(paste(cfa_theme, collapse = "|"), list.files(css_dir), value = TRUE)
 
     if (theme_copy) {
       copyResources(resources=theme.css)
@@ -68,7 +68,7 @@ cfaXaringan <- function(
     } else {
       options(htmltools.dir.version = FALSE)
       theme_css <- if (length(theme.css)) {
-        if (is.null(check_builtin_css(theme))) {
+        if (is.null(check_builtin_css(cfa_theme))) {
           htmltools::htmlDependency(
             "css", "0.0.1", css_dir,
             stylesheet = theme.css,
@@ -123,21 +123,29 @@ cfaXaringan <- function(
         dir.create(tmp_libdir, recursive = TRUE)
       head_html <- file.path(lib_dir, "in_header.html")
       params <- list(xExtra_use = include[["xExtra_use"]])
-      if (!is.null(theme)) {
-        if (theme == "cfa-a") {
+      if (!is.null(cfa_theme)) {
+        if (cfa_theme == "cfa-a") {
           params[["width"]] <- "150px"
           params[["height"]] <- "100px"
           params[["top"]] <- "1em"
           params[["right"]] <- "1.25em"
           params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/nciea-logo-long.svg"
+        } 
+        if (cfa_theme != "cfa-b") {
+          params[["width"]] <- "86px"
+          params[["height"]] <- "100px"
+          params[["top"]] <- "0.5em"
+          params[["right"]] <- "0.5em"
+          params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo.svg"
         }
-      } else {
+      } else { # boilerplate for now.
         params[["width"]] <- "86px"
         params[["height"]] <- "100px"
         params[["top"]] <- "0.5em"
         params[["right"]] <- "0.5em"
-        params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo.svg" # could be local if copied to `libs`
+        params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo.svg"
       }
+
       tmp.xE <- rmarkdown::render(include[["xaringanExtra"]], output_file = head_html)
       R.utils::copyDirectory(tmp_libdir, lib_dir)
       unlink(tmp_libdir, recursive = TRUE)

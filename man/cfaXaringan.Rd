@@ -5,7 +5,7 @@
 \title{Xaringan output format for the Center for Assessment}
 \usage{
 cfaXaringan(
-  theme = "cfa-a",
+  cfa_theme = "cfa-a",
   theme_copy = TRUE,
   include = list(footer = "default", xaringanExtra = "default", xExtra_use =
     c("share_again", "slide_tone", "tile_view", "clipboard")),
@@ -17,7 +17,7 @@ cfaXaringan(
 )
 }
 \arguments{
-\item{theme}{Name of CSS based theme for slides (length 1). Alternatively \code{NULL}
+\item{cfa_theme}{Name of CSS based theme for slides (length 1). Alternatively \code{NULL}
 with \code{css} argument specified Default: 'cfa-a'}
 
 \item{theme_copy}{Boolean - should the theme assets be copied to users
@@ -27,7 +27,7 @@ xaringan built-in themes, Default: TRUE}
 xaringanExtra add-ins. Default: \code{list(footer = "default", xaringanExtra = "default",
 xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard"))}}
 
-\item{css}{Optional file paths to css assets (\code{theme} must be NULL if used). Users can
+\item{css}{Optional file paths to css assets (\code{cfa_theme} must be NULL if used). Users can
 also provide a mix of css from multiple themes using a specific file path convention,
 e.g. \code{c("**/cfa-a.css", "**/cfa-b-fonts.css")}. Default: NULL}
 
