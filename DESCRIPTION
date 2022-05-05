@@ -7,7 +7,7 @@ Description: A package for the development, creation and formatting of the Cente
 Authors@R: c(person(given=c("Adam", "R."), family="Van Iwaarden", email="avaniwaarden@nciea.org", role=c("aut", "cre")),
 		person(given=c("Damian", "W."), family="Betebenner", email="dbetebenner@nciea.org", role="aut"))
 Maintainer: Adam R. Van Iwaarden <avaniwaarden@nciea.org>
-Depends: R (>= 3.6), rmarkdown, xaringan, pagedown
+Depends: R (>= 3.6), rmarkdown, xaringan, pagedown, knitr
 Suggests: toOrdinal
 Imports:
         htmltools,
