@@ -1,20 +1,15 @@
 Package: cfaDocs
 Type: Package
 Title: Content Creation and Development Via R
-Version: 0.0-1.0
-Date: 2022-5-3
+Version: 0.0-1.1
+Date: 2022-5-4
 Description: A package for the development, creation and formatting of the Center for Assessments intellectual content.
-Authors@R: c(person(given=c("Adam", "R."), family="Van Iwaarden", email="avaniwaarden@nciea.org", role=c("aut", "cre")),
-		person(given=c("Damian", "W."), family="Betebenner", email="dbetebenner@nciea.org", role="aut"))
+Authors@R: c(person(given=c("Adam", "R."), family="Van Iwaarden", email="avaniwaarden@nciea.org", role=c("aut", "cre")), person(given=c("Damian", "W."), family="Betebenner",
+                    email="dbetebenner@nciea.org", role="aut"))
 Maintainer: Adam R. Van Iwaarden <avaniwaarden@nciea.org>
-Depends: R (>= 3.6), rmarkdown, xaringan, pagedown
+Depends: R (>= 3.6), rmarkdown
 Suggests: toOrdinal
-Imports:
-        htmltools,
-        R.utils,
-        rmarkdown,
-        stats,
-        xaringan
+Imports: crayon, htmltools, R.utils, rmarkdown, stats, utils, xaringan
 SystemRequirements: pandoc (>= 2.14) - http://johnmacfarlane.net/pandoc
 LazyData: Yes
 LazyDataCompression: xz

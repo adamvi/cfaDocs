@@ -2,9 +2,11 @@
 
 export(cfaXaringan)
 importFrom(R.utils,copyDirectory)
+importFrom(crayon,magenta)
 importFrom(htmltools,copyDependencyToDir)
 importFrom(htmltools,htmlDependency)
 importFrom(rmarkdown,includes)
 importFrom(rmarkdown,render)
 importFrom(stats,setNames)
+importFrom(utils,packageVersion)
 importFrom(xaringan,moon_reader)
