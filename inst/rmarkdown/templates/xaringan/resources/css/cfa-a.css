@@ -3,9 +3,12 @@
 /* primary and secondary colors and variants */
 --cfa-primary:  #121824; /* primary color */
 --cfa-green:    #29a829;
+--cfa-footer:   #7d7d7b;
 
---inverse-text: #eeeeef;
---inverse-bkgd: #7d7d7b;
+/* --inverse-text: #eeeeef; */
+/* --inverse-bkgd: #7d7d7b; */
+--inverse-text: #efefee;
+--inverse-bkgd: transparent;
 --inverse-brdr: #29a82920;
 
 --code-text: rgba(169, 5, 51, 1);
@@ -42,11 +45,14 @@
 .inverse {
   background-color: var(--inverse-bkgd);
   color: var(--inverse-text);
-  text-shadow: 0 0 20px rgb(51, 51, 51);
-  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg);
-  background-size: contain;
-  border-right: 150px solid var(--inverse-brdr);
-  height: 250px;
+  text-shadow: 0 0 40px rgb(51, 51, 51);
+  /* background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg); */
+  /* background-size: contain; */
+  /* background-image: url(https://github.com/adamvi/cfaDocs/raw/main/inst/rmarkdown/templates/xaringan/resources/img/green-leaf-bg.jpg); */
+  background-image: url(https://github.com/adamvi/cfaDocs/raw/main/inst/rmarkdown/templates/xaringan/resources/img/red-leaves.jpg);
+  background-size: cover;
+  /* border-right: 150px solid var(--inverse-brdr);
+  height: 250px; */
 }
 
 .inverse h1,
@@ -136,7 +142,7 @@ a:hover { border-bottom: none; }
 
 
 /*-- PARAGRAPH TEXT --*/
-.remark-slide-content:not(pre, code, .title-slide) {
+.remark-slide-content:not(pre, code, .title-slide, .inverse) {
   font-size: 1.6rem; /* paragraph text only */
   padding: 1em 3em 1em 3em;
   line-height: 1.5em;
@@ -145,11 +151,12 @@ a:hover { border-bottom: none; }
 /*-- HEADINGS --*/
 
 h1:not(div.title > h1, .inverse h1) {
+  font-size: 2em;
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: -25px;
   margin-right: 0px;
   margin-left: 0px;
-  line-height: 2em;
+  line-height: 1.75em;
   border-bottom: 2px solid var(--cfa-green);
 }
 
@@ -160,16 +167,21 @@ h2:not(div.subtitle > h2), h3:not(div.author > h3, div.institute > h3, div.date 
   margin-bottom: -10px;
   padding-bottom: 0px;
   text-shadow: none;
-  line-height: 1.5em;
+}
+
+h2:not(div.subtitle > h2) {
   border-bottom: 1.5px solid var(--cfa-green);
 }
 
+
 .remark-slide-content h2:not(div.subtitle > h2) {
-  font-size: 1.5em;
+  font-size: 1.75em;
+  line-height: 1.15em;
 }
 
 .remark-slide-content h3:not(div.author > h3, div.institute > h3, div.date > h3) {
   font-size: 1.3em;
+  line-height: 1.25em;
 }
 
 
@@ -192,7 +204,7 @@ hr {
 
 .remark-slide-number {
   font-size: 0.75em;
-  color: var(--inverse-bkgd);
+  color: var(--cfa-footer);
   opacity: 1;
   position: absolute;
   right: 5%;
@@ -217,14 +229,14 @@ div.footer {
 }
 
 a.footer {
-  color: var(--inverse-bkgd);
+  color: var(--cfa-footer);
   font-size: 0.75em;
   text-decoration: none;
 }
 
 .inverse a.footer {
   color: var(--inverse-text);
-  font-size: 0.75em;
+  font-size: 0.95em;
   text-decoration: none;
 }
 
