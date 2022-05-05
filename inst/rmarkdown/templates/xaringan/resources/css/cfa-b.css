@@ -5,7 +5,7 @@
 --cfa-green:    #29a829;
 
 --inverse-text: #eeeeef;
---inverse-bkgd: #7d7d7b;
+--inverse-bkgd: #7d7d7b; /* also used for footer text */
 --inverse-brdr: #29a82920;
 
 --code-text: rgba(169, 5, 51, 1);
@@ -167,6 +167,9 @@ h2:not(div.subtitle > h2), h3:not(div.author > h3, div.institute > h3, div.date 
   padding-bottom: 0px;
   text-shadow: none;
   line-height: 1.5em;
+}
+
+h2:not(div.subtitle > h2) {
   border-bottom: 1.5px solid var(--cfa-green);
 }
 
@@ -250,7 +253,7 @@ a.footer:hover {
 /*-- In-line highlighting within text --*/
 .remark-code, .remark-inline-code {
   font-family: 'Ubuntu Mono', monospace;
-  font-weight: 400;
+  /* font-weight: 400; */
   color: var(--code-text);
   border-radius: 5px;
   background-color: #f4f4f4;
