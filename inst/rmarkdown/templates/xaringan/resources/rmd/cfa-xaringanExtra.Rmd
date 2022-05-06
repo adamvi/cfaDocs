@@ -22,7 +22,7 @@ output:
 ```{r style-share-again, echo=FALSE}
 xaringanExtra::style_share_again(
   share_buttons = c("twitter"),
-  background = "#009C49",
+  background = "#29a829",
   foreground = "#FFFFFF"
 )
 ```

@@ -1,27 +1,39 @@
 #' @title Xaringan output format for the Center for Assessment
 #'
-#' @description Function to render xaringan/remark.js presentation slides using
-#' custom templates and themes. This output format produces an HTML file that contains
-#' the Markdown source (knitted from R Markdown) and JavaScript code to render slides.
+#' @description Render xaringan/remark.js presentation slides using custom
+#' templates and themes. This output format produces an HTML file that contains
+#' the Markdown source (knitted from R Markdown) and JavaScript code to render
+#' slides.
 #'
-#' @param cfa_theme Name of CSS based theme for slides (length 1). Alternatively \code{NULL}
-#'     with \code{css} argument specified Default: 'cfa-a'
+#' @param cfa_theme Name of CSS based theme for slides (length 1). Alternatively
+#'  \code{NULL} with \code{css} argument specified Default: 'cfa-a'
 #' @param theme_copy Boolean - should the theme assets be copied to users
-#'     xaringan built-in themes, Default: TRUE
-#' @param include features to include, such as custom CfA footer and a preset list of
-#'     xaringanExtra add-ins. Default: \code{list(footer = "default", xaringanExtra = "default",
-#'     xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard"))}
-#' @param css Optional file paths to css assets (\code{cfa_theme} must be NULL if used). Users can
-#'     also provide a mix of css from multiple themes using a specific file path convention,
-#'     e.g. \code{c("**/cfa-a.css", "**/cfa-b-fonts.css")}. Default: NULL
+#'  xaringan built-in themes, Default: TRUE
+#' @param include features to include, such as custom CfA footer and a preset
+#'  list of xaringanExtra add-ins. The available elements currently include
+#'  \code{footer} which can be the default style or the path to a custom footer
+#'  code file, \code{footer_text} is text to display in the default footer
+#'  (default text is the Center's web page), \code{xaringanExtra} is the path to
+#'  a Rmd file that creates the dependency links for the default used functions,
+#'  which include \code{use_logo} and any others included in the \code{xExtra_use}
+#'  element (default functions are \code{c("share_again", "slide_tone", "tile_view", "clipboard"))}
+#' @param css Optional file paths to css assets (\code{cfa_theme} must be NULL
+#'  if used). Users can also provide a mix of css from multiple themes using
+#'  a specific file path convention, e.g. \code{c("**/cfa-a.css", "**/cfa-b-fonts.css")}.
+#'  Default: NULL
 #' @param extras A named list of extra resources to be copied to the \code{lib_dir}, e.g.
-#'     \code{list(fig = "cfa_assets/fig")} (or in Rmd YAML as \code{extras: !expr list(fig = 'cfa_assets/fig')}
-#'     for figures placed in Rmd directly with <img> tag). Default: list()
+#'  \code{list(fig = "cfa_assets/fig")} (or in Rmd YAML as
+#'  \code{extras: !expr list(fig = 'cfa_assets/fig')} for figures placed in
+#'  Rmd directly with <img> tag). Default: list()
+#' @param nature List fed to the \code{nature} argument in
+#'  \code{\link[xaringan]{moon_reader}}.
 #' @param lib_dir Directory name of external/custom resources to be copied into
-#'     (e.g. xaringanExtra js/css dependencies). Default: 'libs'
-#' @param asset_dir Directory name of custom resource location. Assumes subdirectories
-#'     with names "css", "img", or as given in \code{extras}. Default: 'cfa_assets'
-#' @param ... Additional arguments passed to \code{\link[xaringan]{moon_reader}}
+#'  (e.g. xaringanExtra js/css dependencies). Default: 'libs'
+#' @param asset_dir Directory name of custom resource location. Assumes
+#'  subdirectories with names "css", "img", or as given in \code{extras}.
+#'  Default: 'cfa_assets'
+#' @param ... Additional arguments passed to \code{\link[xaringan]{moon_reader}} 
+#'  and \code{\link[rmarkdown]{render}}
 #' @return HTML slide presentation.
 #' @details Slides are formatted with any combination of CfA based themes
 #'
@@ -48,6 +60,11 @@ cfaXaringan <- function(
     xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard")),
   css = NULL,
   extras = list(),
+  nature = list(
+      ratio = "16:9",
+      highlightStyle = "github",
+      highlightLines = TRUE,
+      countIncrementalSlides = FALSE),
   lib_dir = "libs",
   asset_dir = "cfa_assets",
   ...
@@ -107,6 +124,9 @@ cfaXaringan <- function(
     }
   }
 
+  # Create lib_dir if it has not been above (needed for in_header.html at min)
+  if (!dir.exists(lib_dir)) dir.create(lib_dir, recursive = TRUE)
+
   if (length(include)) {
     if (length(include[["footer"]])) {
       if (include[["footer"]] == "default") {
@@ -130,7 +150,7 @@ cfaXaringan <- function(
           params[["top"]] <- "1em"
           params[["right"]] <- "1.25em"
           params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/nciea-logo-long.svg"
-        } 
+        }
         if (cfa_theme != "cfa-b") {
           params[["width"]] <- "86px"
           params[["height"]] <- "100px"
@@ -155,7 +175,9 @@ cfaXaringan <- function(
       tmp_html <- c("<link rel=\"icon\" type=\"image/png\" href=\"https://centerforassessment.github.io/assets/favicon.png\" sizes=\"16x16\">", tmp_html)
       writeLines(tmp_html, head_html)
     }
-  } else foot_md <- NULL
+  }
+
+  if (!exists("foot_md")) foot_md <- NULL
 
   if (!exists("head_html")) {
     head_html <- file.path(lib_dir, "in_header.html")
@@ -165,6 +187,7 @@ cfaXaringan <- function(
   ##  template
   xaringan::moon_reader(
     css = theme.css,
+    nature = nature,
     lib_dir = lib_dir,
     includes = rmarkdown::includes(in_header = head_html, before_body = foot_md),
     ...
