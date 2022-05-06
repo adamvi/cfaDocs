@@ -45,7 +45,9 @@
   text-shadow: 0 0 20px rgb(51, 51, 51);
   background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg);
   background-size: contain;
-  border-right: 150px solid var(--inverse-brdr);
+  border-right: 100px solid var(--inverse-brdr);
+  height: 250px;
+  border-left: 100px solid var(--inverse-brdr);
   height: 250px;
 }
 
@@ -56,9 +58,10 @@
 }
 
 .inverse .remark-slide-number {
-  font-size: 13pt;
+  font-size: 14pt;
   color: var(--inverse-text);
   opacity: 1;
+  line-height: 1.6em;
 }
 
 
@@ -68,13 +71,14 @@
 .title-slide {
   background-color: white;
   color: var(--cfa-primary);
-  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/nciea-logo-long.svg),
-                    /* url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/cc_logo.svg); */
+  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg),
                     url(https://mirrors.creativecommons.org/presskit/cc.logo.svg),
                     url(https://mirrors.creativecommons.org/presskit/icons/by.svg);
-  background-size: 25%, 10%, 2.125%;
-  background-position: top 10% left 10%, bottom 2.5% right 3%, bottom 2.5% right 0.5%;
-  border-right: 150px solid var(--cfa-green);
+  background-position: center, bottom 2.5% right 3%, bottom 2.5% right 0.5%;
+  background-size: contain, 10%, 2.125%;
+  border-right: 100px solid var(--cfa-green);
+  height: 250px;
+  border-left: 100px solid var(--cfa-green);
   height: 250px;
 }
 
@@ -87,26 +91,22 @@
 .title h1 {
   color: var(--cfa-primary);
   text-shadow: none;
-  margin-top: 125px;
-  margin-right: -50px;
-  line-height: 1em;
-  font-size: 2.5em;
-  font-weight: 400;
+  line-height: 1.25em;
+  font-size: 2em;
+  font-weight: 600;
 }
 
 .subtitle h2 {
   color: var(--cfa-primary);
   text-shadow: none;
   line-height: 1.25em;
-  font-size: 1.5em;
+  font-size: 1.75em;
   font-weight: 400;
-  margin-top: -15px;
-  margin-right: -50px;
 }
 
 .title, .subtitle, .author, .institute, .date {
   margin-right: 1.15em;
-  text-align: left;
+  /* text-align: left; */
 }
 
 .institute {
@@ -136,24 +136,30 @@ a:hover { border-bottom: none; }
 
 
 /*-- PARAGRAPH TEXT --*/
-.remark-slide-content:not(pre, code, .title-slide) {
+.remark-slide-content:not(pre, code, .title-slide, .inverse) {
   font-size: 1.6rem; /* paragraph text only */
-  padding: 1em 3em 1em 3em;
+  padding: 1em 6em 1em 6em;
   line-height: 1.5em;
+  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg),
+    url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg);
+  background-size: 40%, 40%;
+  background-position: bottom 20% left 138%, bottom 30% right 142%;
 }
 
 /*-- HEADINGS --*/
 
 h1:not(div.title > h1, .inverse h1) {
+  text-align: center;
   font-weight: 500;
   margin-top: 10px;
-  margin-right: 0px;
-  margin-left: 0px;
-  line-height: 2em;
+  margin-right: -75px;
+  margin-left: -75px;
+  line-height: 1.75em;
   border-bottom: 2px solid var(--cfa-green);
 }
 
 h2:not(div.subtitle > h2), h3:not(div.author > h3, div.institute > h3, div.date > h3), h4 {
+  text-align: center;
   font-weight: 300;
   padding-top: 0px;
   margin-left: 00px;
@@ -165,10 +171,12 @@ h2:not(div.subtitle > h2), h3:not(div.author > h3, div.institute > h3, div.date 
 }
 
 .remark-slide-content h2:not(div.subtitle > h2) {
+  /*font-size: 35px;*/
   font-size: 1.5em;
 }
 
 .remark-slide-content h3:not(div.author > h3, div.institute > h3, div.date > h3) {
+  /*font-size: 30px;*/
   font-size: 1.3em;
 }
 
@@ -219,12 +227,13 @@ div.footer {
 a.footer {
   color: var(--inverse-bkgd);
   font-size: 0.75em;
+  line-height: 1.85rem;
   text-decoration: none;
 }
 
 .inverse a.footer {
   color: var(--inverse-text);
-  font-size: 0.75em;
+  font-size: 0.95em;
   text-decoration: none;
 }
 
@@ -240,7 +249,7 @@ a.footer:hover {
 
 /*-- In-line highlighting within text --*/
 .remark-code, .remark-inline-code {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   font-weight: 400;
   color: var(--code-text);
   border-radius: 5px;
@@ -251,7 +260,7 @@ a.footer:hover {
 /*-- CODE CHUNKS --*/
 
 pre code {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   line-height: 1.75em;
 }
 

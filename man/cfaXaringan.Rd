@@ -5,7 +5,7 @@
 \title{Xaringan output format for the Center for Assessment}
 \usage{
 cfaXaringan(
-  theme = "cfa-a",
+  cfa_theme = "cfa-a",
   theme_copy = TRUE,
   include = list(footer = "default", xaringanExtra = "default", xExtra_use =
     c("share_again", "slide_tone", "tile_view", "clipboard")),
@@ -17,32 +17,39 @@ cfaXaringan(
 )
 }
 \arguments{
-\item{theme}{Name of CSS based theme for slides (length 1). Alternatively `NULL` with `css` argument specified Default: 'cfa-a'}
+\item{cfa_theme}{Name of CSS based theme for slides (length 1). Alternatively \code{NULL}
+with \code{css} argument specified Default: 'cfa-a'}
 
-\item{theme_copy}{Boolean - should the theme assets be copied to users xaringan built-in themes, Default: TRUE}
+\item{theme_copy}{Boolean - should the theme assets be copied to users
+xaringan built-in themes, Default: TRUE}
 
-\item{include}{features to include, such as custom CfA footer and a preset list of xaringanExtra add-ins. 
-Default: list(footer = "default", xaringanExtra = "default", xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard"))}
+\item{include}{features to include, such as custom CfA footer and a preset list of
+xaringanExtra add-ins. Default: \code{list(footer = "default", xaringanExtra = "default",
+xExtra_use = c("share_again", "slide_tone", "tile_view", "clipboard"))}}
 
-\item{css}{Optional file paths to css assets (`theme` must be NULL if used). Users can also provide a mix of css
-from multiple themes using a specific file path convention, e.g. `c("**/cfa-a.css", "**/cfa-b-fonts.css")`. Default: NULL}
+\item{css}{Optional file paths to css assets (\code{cfa_theme} must be NULL if used). Users can
+also provide a mix of css from multiple themes using a specific file path convention,
+e.g. \code{c("**/cfa-a.css", "**/cfa-b-fonts.css")}. Default: NULL}
 
-\item{extras}{A named list of extra resources to be copied to the `lib_dir`, e.g. `list(fig = "cfa_assets/fig")` 
-(or in Rmd YAML as `extras: !expr list(fig = 'cfa_assets/fig')` for figures placed in Rmd directly with <img> tag). Default: list()}
+\item{extras}{A named list of extra resources to be copied to the \code{lib_dir}, e.g.
+\code{list(fig = "cfa_assets/fig")} (or in Rmd YAML as \code{extras: !expr list(fig = 'cfa_assets/fig')}
+for figures placed in Rmd directly with <img> tag). Default: list()}
 
-\item{lib_dir}{Directory name of external/custom resources to be copied into (e.g. xaringanExtra js/css dependencies). Default: 'libs'}
+\item{lib_dir}{Directory name of external/custom resources to be copied into
+(e.g. xaringanExtra js/css dependencies). Default: 'libs'}
 
-\item{asset_dir}{Directory name of custom resource location. Assumes subdirectories with names "css", "img", or as given in `extras`. Default: 'cfa_assets'}
+\item{asset_dir}{Directory name of custom resource location. Assumes subdirectories
+with names "css", "img", or as given in \code{extras}. Default: 'cfa_assets'}
 
-\item{...}{Additional arguments passed to `xaringan::moon_reader`}
+\item{...}{Additional arguments passed to \code{\link[xaringan]{moon_reader}}}
 }
 \value{
 HTML slide presentation.
 }
 \description{
-Function to render xaringan/remark.js presentation slides using custom templates and themes.
-  This output format produces an HTML file that contains the Markdown source (knitted from R Markdown) and
-  JavaScript code to render slides.
+Function to render xaringan/remark.js presentation slides using
+custom templates and themes. This output format produces an HTML file that contains
+the Markdown source (knitted from R Markdown) and JavaScript code to render slides.
 }
 \details{
 Slides are formatted with any combination of CfA based themes
