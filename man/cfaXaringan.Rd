@@ -19,36 +19,40 @@ cfaXaringan(
 )
 }
 \arguments{
-\item{cfa_theme}{Name of CSS based theme for slides (length 1). Alternatively \code{NULL}
-with \code{css} argument specified Default: 'cfa-a'}
+\item{cfa_theme}{Name of CSS based theme for slides (length 1). Alternatively
+\code{NULL} with \code{css} argument specified Default: 'cfa-a'}
 
 \item{theme_copy}{Boolean - should the theme assets be copied to users
 xaringan built-in themes, Default: TRUE}
 
-\item{include}{features to include, such as custom CfA footer and a preset list of
-xaringanExtra add-ins. The available elements currently include \code{footer}
-which can be the default style or the path to a custom footer code file,
-\code{footer_text} is text to display in the default footer (default text is 
-the Center's web page), \code{xaringanExtra} is the path to a Rmd file that creates
-the dependency links for the default used functions, which include \code{use_logo}
-and any others included in the \code{xExtra_use} element (default functions are
-\code{c("share_again", "slide_tone", "tile_view", "clipboard"))}}
+\item{include}{features to include, such as custom CfA footer and a preset
+list of xaringanExtra add-ins. The available elements currently include
+\code{footer} which can be the default style or the path to a custom footer
+code file, \code{footer_text} is text to display in the default footer
+(default text is the Center's web page), \code{xaringanExtra} is the path to
+a Rmd file that creates the dependency links for the default used functions,
+which include \code{use_logo} and any others included in the \code{xExtra_use}
+element (default functions are \code{c("share_again", "slide_tone", "tile_view", "clipboard"))}}
 
-\item{css}{Optional file paths to css assets (\code{cfa_theme} must be NULL if used).
-Users can also provide a mix of css from multiple themes using a specific file path
-convention, e.g. \code{c("**/cfa-a.css", "**/cfa-b-fonts.css")}. Default: NULL}
+\item{css}{Optional file paths to css assets (\code{cfa_theme} must be NULL
+if used). Users can also provide a mix of css from multiple themes using
+a specific file path convention, e.g. \code{c("**/cfa-a.css", "**/cfa-b-fonts.css")}.
+Default: NULL}
 
 \item{extras}{A named list of extra resources to be copied to the \code{lib_dir}, e.g.
-\code{list(fig = "cfa_assets/fig")} (or in Rmd YAML as \code{extras: !expr list(fig = 'cfa_assets/fig')}
-for figures placed in Rmd directly with <img> tag). Default: list()}
+\code{list(fig = "cfa_assets/fig")} (or in Rmd YAML as
+\code{extras: !expr list(fig = 'cfa_assets/fig')} for figures placed in
+Rmd directly with <img> tag). Default: list()}
 
-\item{nature}{List fed to the \code{nature} argument in \code{\link[xaringan]{moon_reader}}.}
+\item{nature}{List fed to the \code{nature} argument in
+\code{\link[xaringan]{moon_reader}}.}
 
 \item{lib_dir}{Directory name of external/custom resources to be copied into
 (e.g. xaringanExtra js/css dependencies). Default: 'libs'}
 
-\item{asset_dir}{Directory name of custom resource location. Assumes subdirectories
-with names "css", "img", or as given in \code{extras}. Default: 'cfa_assets'}
+\item{asset_dir}{Directory name of custom resource location. Assumes
+subdirectories with names "css", "img", or as given in \code{extras}.
+Default: 'cfa_assets'}
 
 \item{...}{Additional arguments passed to \code{\link[xaringan]{moon_reader}} 
 and \code{\link[rmarkdown]{render}}}
@@ -57,9 +61,10 @@ and \code{\link[rmarkdown]{render}}}
 HTML slide presentation.
 }
 \description{
-Function to render xaringan/remark.js presentation slides using
-custom templates and themes. This output format produces an HTML file that contains
-the Markdown source (knitted from R Markdown) and JavaScript code to render slides.
+Render xaringan/remark.js presentation slides using custom
+templates and themes. This output format produces an HTML file that contains
+the Markdown source (knitted from R Markdown) and JavaScript code to render
+slides.
 }
 \details{
 Slides are formatted with any combination of CfA based themes

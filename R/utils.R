@@ -59,3 +59,13 @@ makeOctoCat <- function(
     tmp_octcat <- sub("TMP_LINK", link, tmp_octcat)
     tmp_octcat
 }
+
+# Given the path to a file, return a file:// URL.
+# Adapted slightly from webshot2 utils
+file_url <- function(filename) {
+  if (.Platform$OS.type == "windows") {
+    paste0("file://", normalizePath(filename, mustWork = TRUE))
+  } else {
+    enc2utf8(paste0("file:///", normalizePath(filename, winslash = "/", mustWork = TRUE)))
+  }
+}
