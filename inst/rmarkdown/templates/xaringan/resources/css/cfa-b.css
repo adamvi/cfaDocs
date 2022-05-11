@@ -43,7 +43,7 @@
   background-color: var(--inverse-bkgd);
   color: var(--inverse-text);
   text-shadow: 0 0 20px rgb(51, 51, 51);
-  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg);
+  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/CFA_Logo_alpha_07.svg);
   background-size: contain;
   border-right: 100px solid var(--inverse-brdr);
   height: 250px;
@@ -71,7 +71,7 @@
 .title-slide {
   background-color: white;
   color: var(--cfa-primary);
-  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg),
+  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/CFA_Logo_alpha_07.svg),
                     url(https://mirrors.creativecommons.org/presskit/cc.logo.svg),
                     url(https://mirrors.creativecommons.org/presskit/icons/by.svg);
   background-position: center, bottom 2.5% right 3%, bottom 2.5% right 0.5%;
@@ -140,8 +140,8 @@ a:hover { border-bottom: none; }
   font-size: 1.6rem; /* paragraph text only */
   padding: 1em 6em 1em 6em;
   line-height: 1.5em;
-  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg),
-    url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg);
+  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/CFA_Logo_alpha_07.svg),
+    url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/CFA_Logo_alpha_07.svg);
   background-size: 40%, 40%;
   background-position: bottom 20% left 138%, bottom 30% right 142%;
 }
