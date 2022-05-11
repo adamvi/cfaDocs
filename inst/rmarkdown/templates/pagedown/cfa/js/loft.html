@@ -24,7 +24,7 @@ Paged.registerHandlers(class extends Paged.Handler {
           const id = figure.firstElementChild.id;
           const lofEntry = content.querySelector('#LOF a[href*="' + id +'"]');
           lofEntry.childNodes[0].textContent = lofEntry.childNodes[0].textContent
-            .replace(/\d*.\d*/, newLabel + ':');
+            .replace(/\d*.\d*/, newLabel + ': ');
         }
     }
   }
