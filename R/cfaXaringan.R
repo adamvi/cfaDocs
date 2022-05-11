@@ -1,4 +1,5 @@
 #' @title Xaringan output format for the Center for Assessment
+#' @author Adam Van Iwaarden
 #'
 #' @description Render xaringan/remark.js presentation slides using custom
 #' templates and themes. This output format produces an HTML file that contains
@@ -44,14 +45,13 @@
 #'  \code{\link[xaringan]{moon_reader}}
 #' @references \url{https://github.com/yihui/xaringan/wiki}
 #' @rdname cfaXaringan
-#' @author Adam Van Iwaarden
 #' @keywords documentation presentations
 #' @importFrom htmltools htmlDependency copyDependencyToDir
 #' @importFrom rmarkdown render includes
 #' @importFrom R.utils copyDirectory
 #' @importFrom xaringan moon_reader
 #' @export
-cfaXaringan <- function(
+cfaXaringan = function(
   cfa_theme = "cfa-a",
   theme_copy = TRUE,
   include = list(
@@ -76,7 +76,7 @@ cfaXaringan <- function(
 
   if (!is.null(cfa_theme)) {
     # Check css
-    css_dir <- pkg_resource("css")
+    css_dir <- cfa_xrgn_res("css")
     theme.css <- grep(paste(cfa_theme, collapse = "|"), list.files(css_dir), value = TRUE)
 
     if (theme_copy) {
@@ -102,7 +102,7 @@ cfaXaringan <- function(
   } else {
     # allow user to mix and match cfa theme assets
     options(htmltools.dir.version = FALSE)
-    theme.css <- gsub("^\\*\\*", pkg_resource("css"), css)
+    theme.css <- gsub("^\\*\\*", cfa_xrgn_res("css"), css)
     theme_css <- htmltools::htmlDependency(
       "css", "0.0.1", dirname(theme.css),
       stylesheet = basename(theme.css),
@@ -138,7 +138,7 @@ cfaXaringan <- function(
     }
     if (length(include[["xaringanExtra"]])) {
       if (include[["xaringanExtra"]] == "default")
-        include[["xaringanExtra"]] <- pkg_resource("rmd/cfa-xaringanExtra.Rmd")
+        include[["xaringanExtra"]] <- cfa_xrgn_res("rmd/cfa-xaringanExtra.Rmd")
       if (!dir.exists(tmp_libdir <- file.path(dirname(include[["xaringanExtra"]]), lib_dir)))
         dir.create(tmp_libdir, recursive = TRUE)
       head_html <- file.path(lib_dir, "in_header.html")
@@ -149,21 +149,21 @@ cfaXaringan <- function(
           params[["height"]] <- "100px"
           params[["top"]] <- "1em"
           params[["right"]] <- "1.25em"
-          params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/nciea-logo-long.svg"
+          params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/cfa-long-logo.svg"
         }
         if (cfa_theme != "cfa-b") {
           params[["width"]] <- "86px"
           params[["height"]] <- "100px"
           params[["top"]] <- "0.5em"
           params[["right"]] <- "0.5em"
-          params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo.svg"
+          params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/cfa-logo.svg"
         }
       } else { # boilerplate for now.
         params[["width"]] <- "86px"
         params[["height"]] <- "100px"
         params[["top"]] <- "0.5em"
         params[["right"]] <- "0.5em"
-        params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo.svg"
+        params[["img"]] <- "https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/cfa-logo.svg"
       }
 
       tmp.xE <- rmarkdown::render(include[["xaringanExtra"]], output_file = head_html)

@@ -27,7 +27,7 @@
 #' @importFrom rmarkdown yaml_front_matter
 #' @importFrom yaml as.yaml
 #' @importFrom webshot2 rmdshot
-shareImage <- function(
+shareImage = function(
     slides_rmd,
     width = 600*(191/100),
     height = 600,
