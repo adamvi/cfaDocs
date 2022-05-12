@@ -1,0 +1,59 @@
+/* page size */
+@page {
+  size: 210mm 297mm;
+}
+
+/* first page */
+@page:first {
+  @top-center {
+    content: none;
+  }
+  @top-right {
+    content: none;
+  }
+  /* omit page number on first page */
+  @bottom-right {
+    content: none;
+  }
+}
+
+/* left page */
+.shorttitle {
+  position: running(runningTitle);
+}
+
+@page {
+  @bottom-right {
+    content: counter(page);
+  }
+  @top-center {
+    content: element(runningTitle);
+    width: 150mm;
+    font-style: italic;
+  }
+}
+
+@media print {
+  .pagebreak {
+    min-height: 1px;
+    clear: both;
+    page-break-after: always;
+  }
+  .sourceCode {
+    overflow: visible !important;
+    display: grid;
+  }
+  .sourceLine::before {
+    text-decoration: unset !important;
+  }
+}
+
+/* ---------------------- Main Content ----------------- */
+
+.main-container {
+	page: maincontent;
+}
+
+.pagedjs_maincontent_first_page {
+  display:none;
+}

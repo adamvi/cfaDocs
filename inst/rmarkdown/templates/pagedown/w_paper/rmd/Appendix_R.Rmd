@@ -1,0 +1,68 @@
+---
+title: "Appendix R"
+appendix-prefix: "R"
+output:
+  html_document:
+    template: ../assets/pandoc/wp_appendix.html
+    self_contained: true
+---
+
+<!--
+  This document is intended to be rendered from the "Child_RMD" directory.
+-->
+
+# R Session Information
+
+Since `R` [@Rsoftware2022] and `R` packages are constantly evolving, it is critical to
+document information on the software version and packages that were loaded and system
+platform used during analyses and reporting [@Bauer2018-dl]. This appendix provides the
+`R` and system specifications used in the creation of do this report and its associated
+analyses.
+
+```{r r-session-info, echo=FALSE}
+# set width option to force fit onto page margins
+# options(width=75)
+# print(sessionInfo(), locale = FALSE)
+# when using child='Appendix_*.Rmd'
+# knitr::knit_print(capture.output(print(sessionInfo(), locale = FALSE)))
+pander::pander(sessionInfo(), compact = FALSE, locale=FALSE)
+
+  #r-session-platform, fig.cap="R Session Platform Information", out.width="0", out.height="0", out.extra=tab.out.ex, class = "figtab", results="asis"}
+	###  Include VERY small, transparent image to create table title and
+	# knitr::include_graphics("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", dpi=NA, error = FALSE)
+  #
+  # session_platform <- as.data.table(unlist(devtools::session_info()$platform), keep.rownames=T)[V1 != "tz"]
+  # setnames(session_platform, c("Setting", "Value"))
+  # row.names(session_platform) <- NULL
+  #
+  # knitr::knit_print(
+	# 	htmlTable::htmlTable(as.matrix(session_platform), align='rr',
+	#     caption = tblCap(knitr::opts_current$get("fig.cap"))))
+```
+
+<!--  End appendix format: re-start counters and change back to numeric for subsequent re-rendering-->
+
+```{r, cache=FALSE, results='asis', echo=FALSE}
+	options(table_counter_str = NULL)
+	options(table_num_str = NULL)
+	options(fig_caption_no_sprintf = NULL)
+	options(fig_num_str = NULL)
+```
+
+<!-- ## All the code in the paper
+
+*** NOTE: This doesn't work when your using `child = ` in the "parent" .Rmd file!!! ***
+
+To simply attach all the code you used in the PDF file in the appendix see the R
+chunk in the underlying `.rmd` file:
+
+```{r, allrcode, ref.label=knitr::all_labels(echo == TRUE), echo=TRUE, eval=FALSE, results='asis'}
+```
+-->
+
+<br><br><br>
+
+# References {-}
+
+::: {#refs_appndxR}
+:::

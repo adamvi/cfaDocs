@@ -1,14 +1,14 @@
 Package: cfaDocs
 Type: Package
 Title: Content Creation and Development Via R
-Version: 0.0-1.4
-Date: 2022-5-10
+Version: 0.0-1.5
+Date: 2022-5-12
 Description: A package for the development, creation and formatting of the Center for Assessments intellectual content.
 Authors@R: c(person(given=c("Adam", "R."), family="Van Iwaarden", email="avaniwaarden@nciea.org", role=c("aut", "cre")), 
              person(given=c("Damian", "W."), family="Betebenner", email="dbetebenner@nciea.org", role="aut"))
 Maintainer: Adam R. Van Iwaarden <avaniwaarden@nciea.org>
 Depends: R (>= 3.6), rmarkdown, pagedown 
-Suggests: toOrdinal
+Suggests: toOrdinal, xaringanExtra
 Imports:
         crayon,
         htmltools,
