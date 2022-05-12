@@ -8,6 +8,7 @@ shareImage(
   slides_rmd,
   width = 600 * (191/100),
   height = 600,
+  ratio = "191:100",
   path_image = NULL
 )
 }
@@ -17,6 +18,9 @@ shareImage(
 \item{width}{Output image width (in pixels/px). Default: 600 * (191/100), must be round}
 
 \item{height}{Output image height (in pixels/px). Default: 600, must be round}
+
+\item{ratio}{Character representation of the \code{\link[xaringan]{moon_reader}} 
+ratio list element provided in the `nature` argument.}
 
 \item{path_image}{Path to new share image. Default: NULL will create a .png
 file with the same path/name as `slides_rmd` with '_share_image.png' appended.}
@@ -40,4 +44,5 @@ Uses \code{\link[webshot2]{rmdshot}} to re-render slides in the desired
 \code{\link[rmarkdown]{yaml_front_matter}}
  \code{\link[yaml]{as.yaml}}
  \code{\link[webshot2]{rmdshot}}
+ \code{\link[xaringan]{moon_reader}}
 }

@@ -46,13 +46,9 @@
   background-color: var(--inverse-bkgd);
   color: var(--inverse-text);
   text-shadow: 0 0 40px rgb(51, 51, 51);
-  /* background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/CFA_Logo_alpha_07.svg); */
-  /* background-size: contain; */
-  /* background-image: url(https://github.com/adamvi/cfaDocs/raw/main/inst/rmarkdown/templates/xaringan/resources/img/green-leaf-bg.jpg); */
-  background-image: url(https://github.com/adamvi/cfaDocs/raw/main/inst/rmarkdown/templates/xaringan/resources/img/red-leaves.jpg);
+  /* background-image: url(https://github.com/adamvi/cfaDocs/raw/main/inst/rmarkdown/shared_resources/img/green-leaf-bg.jpg); */
+  background-image: url(https://github.com/adamvi/cfaDocs/raw/main/inst/rmarkdown/shared_resources/img/red-leaves.jpg);
   background-size: cover;
-  /* border-right: 150px solid var(--inverse-brdr);
-  height: 250px; */
 }
 
 .inverse h1,
@@ -74,8 +70,7 @@
 .title-slide {
   background-color: white;
   color: var(--cfa-primary);
-  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/nciea-logo-long.svg),
-                    /* url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/templates/xaringan/resources/img/cc_logo.svg); */
+  background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/cfa-long-logo.svg),
                     url(https://mirrors.creativecommons.org/presskit/cc.logo.svg),
                     url(https://mirrors.creativecommons.org/presskit/icons/by.svg);
   background-size: 25%, 10%, 2.125%;
