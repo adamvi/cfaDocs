@@ -1,0 +1,25 @@
+$for(include-before)$
+$include-before$
+$endfor$
+
+<div id="$if(appendix-prefix)$apndx$appendix-prefix/lowercase$$else$apndx$endif$"
+     class="appendix$if(appendix-prefix)$-$appendix-prefix/lowercase$$endif$-container">
+<appndx role="appndx">
+
+$if(title)$
+<header id="$idprefix$header" class="appndx-title">
+<h1 class="title">$title$</h1>
+<br>
+$if(subtitle)$<h1 class="title"><span>$subtitle$</span></h1>$endif$
+<br>
+</header>
+$endif$
+
+$body$
+
+</appndx>
+</div>
+
+$for(include-after)$
+$include-after$
+$endfor$

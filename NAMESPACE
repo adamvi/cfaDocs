@@ -3,6 +3,7 @@
 export(cfaXaringan)
 export(cfa_paged)
 export(shareImage)
+export(w_paper_paged)
 import(pagedown)
 importFrom(R.utils,copyDirectory)
 importFrom(crayon,magenta)
