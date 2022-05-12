@@ -8,7 +8,7 @@
 #' @param ... Arguments passed to \code{bookdown::\link[bookdown]{html_document2}}
 #'   and/or \code{rmarkdown::\link[rmarkdown]{html_document_base}}.
 #' @param template The path to the Pandoc template to convert Markdown to HTML.
-#'   Default: 'cfa_paged.html' from this package.
+#'   The \code{'default'} will use the 'cfa_paged.html' template from this package.
 #' @param paged_img The images to be used as CSS variables for the cover, footer,
 #'   and other uses. Defaults are 'cfa-front-cover.svg', 'cfa-footer.svg', and
 #'   'cfa-logo.svg'. Note that if customized this should be a named character string
@@ -17,8 +17,8 @@
 #'   `logo` = 'path/to/my-logo.svg')}.
 #' @param css A character vector of CSS and Sass file paths. If a path
 #'   does not contain the \file{.css}, \file{.sass}, or \file{.scss} extension,
-#'   it is assumed to be a built-in CSS file. For example, \code{cfa} (default)
-#'   means the \code{c('cfa-page.css', 'cfa-default.css', 'cfa-style.css')}.
+#'   it is assumed to be a built-in CSS file. The package \code{'default'}
+#'   are \code{c('cfa-page.css', 'cfa-default.css', 'cfa-style.css')}.
 #' @param csl The path of the Citation Style Language (CSL) file used to format
 #'   citations and references (see the
 #'   \href{https://pandoc.org/MANUAL.html#citations}{Pandoc documentation}).
@@ -56,9 +56,9 @@
 
 cfa_paged = function(
   ...,
-  template = cfa_paged_res("cfa", "pandoc", "cfa_paged.html"),
+  template = "default",
   paged_img = "default",
-  css = "cfa",
+  css = "default",
   csl = NULL,
   toc = TRUE,
   toc_depth = 2L,
@@ -69,7 +69,10 @@ cfa_paged = function(
   pandoc_args = NULL
 ) {
 
-  if (tolower(css) == "cfa")
+  if (tolower(template) == "default")
+    template <- cfa_paged_res("cfa", "pandoc", "cfa_paged.html")
+
+  if (tolower(css) == "default")
     css <- grep("cfa-", list.files(cfa_paged_res("cfa", "css")), value = TRUE)
 
   if (all(identical(tolower(paged_img), "default"))) {
@@ -95,9 +98,9 @@ cfa_paged = function(
 
   pagedown:::html_format(
     ...,
-    css = NULL, template = template, theme = NULL, highlight = NULL, mathjax = mathjax,
-    toc = toc, toc_depth = toc_depth, number_sections = number_sections,
-    self_contained = self_contained, anchor_sections = anchor_sections,
+    template = template, css = NULL, toc = toc, toc_depth = toc_depth,
+    number_sections = number_sections, self_contained = self_contained, 
+    anchor_sections = anchor_sections, mathjax = mathjax, theme = NULL, highlight = NULL,
     includes = rmarkdown::includes(in_header = cfa_paged_res("cfa", "js", "loft.html")), # needs to be passed through includes/in_header to work right.
     .pagedjs = TRUE, .pandoc_args = c(
       pagedown:::lua_filters("uri-to-fn.lua", "loft.lua", "footnotes.lua"), # uri-to-fn.lua must come before footnotes.lua
@@ -114,13 +117,22 @@ dep_css = function(styshts) {
     name = "css",
     version = utils::packageVersion("cfaDocs"),
     package = "cfaDocs",
-    src = c(
-      file = "rmarkdown/templates/pagedown/cfa/css"
-    ),
-    stylesheet = styshts,
+    src = c(file = dirname(styshts)[1]), # can only have one - should all be located in same dir
+    stylesheet = basename(styshts),
     all_files = FALSE
   )
 }
+
+# dep_css = function(styshts) {
+#   htmltools::htmlDependency(
+#     name = "css",
+#     version = utils::packageVersion("cfaDocs"),
+#     package = "cfaDocs",
+#     src = c(file = "rmarkdown/templates/pagedown/cfa/css"),
+#     stylesheet = styshts,
+#     all_files = FALSE
+#   )
+# }
 
 dep_js = function() {
   htmltools::htmlDependency(

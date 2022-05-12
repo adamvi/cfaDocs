@@ -6,9 +6,9 @@
 \usage{
 cfa_paged(
   ...,
-  template = cfa_paged_res("cfa", "pandoc", "cfa_paged.html"),
+  template = "default",
   paged_img = "default",
-  css = "cfa",
+  css = "default",
   csl = NULL,
   toc = TRUE,
   toc_depth = 2L,
@@ -24,7 +24,7 @@ cfa_paged(
 and/or \code{rmarkdown::\link[rmarkdown]{html_document_base}}.}
 
 \item{template}{The path to the Pandoc template to convert Markdown to HTML.
-Default: 'cfa_paged.html' from this package.}
+The \code{'default'} will use the 'cfa_paged.html' template from this package.}
 
 \item{paged_img}{The images to be used as CSS variables for the cover, footer,
 and other uses. Defaults are 'cfa-front-cover.svg', 'cfa-footer.svg', and
@@ -35,8 +35,8 @@ to take advantage of default uses. For example: \code{c(`front-cover` =
 
 \item{css}{A character vector of CSS and Sass file paths. If a path
 does not contain the \file{.css}, \file{.sass}, or \file{.scss} extension,
-it is assumed to be a built-in CSS file. For example, \code{cfa} (default)
-means the \code{c('cfa-page.css', 'cfa-default.css', 'cfa-style.css')}.}
+it is assumed to be a built-in CSS file. The package \code{'default'}
+are \code{c('cfa-page.css', 'cfa-default.css', 'cfa-style.css')}.}
 
 \item{csl}{The path of the Citation Style Language (CSL) file used to format
 citations and references (see the
