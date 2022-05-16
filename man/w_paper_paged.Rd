@@ -2,10 +2,11 @@
 % Please edit documentation in R/w_paper_paged.R
 \name{w_paper_paged}
 \alias{w_paper_paged}
-\title{Working/white paper output format}
+\title{'W' paper (working/white) output format}
 \usage{
 w_paper_paged(
   ...,
+  appendices = list(post = list(R = list(file = "r_session_info"))),
   template = "default",
   css = "default",
   csl = "default",
@@ -19,6 +20,12 @@ w_paper_paged(
 \arguments{
 \item{...}{Arguments passed to \code{bookdown::\link[bookdown]{html_document2}}
 and/or \code{rmarkdown::\link[rmarkdown]{html_document_base}}.}
+
+\item{appendices}{A list of appendix source file(s) information. The default is
+to add a R session information appendix that is rendered after the primary
+document has been knitted (post_knit). Pre-rendered appendices (HTML fragments
+that use the 'wp_appendix.html' template) and .Rmd that are knitted before
+the primary document knitting are also possible.}
 
 \item{template}{The path to the Pandoc template to convert Markdown to HTML.
 The \code{'default'} will use the 'wp_paged.html' template from this package.}
@@ -61,11 +68,12 @@ An R Markdown output format.
 }
 \description{
 This is a basic output format appropriate for report drafts,
-working/white papers, etc. and can also incorporate appendices. This template
-is based on the work done by Paul Bauer and Camille Landesvatter. See their
+working/white papers, etc. and can also incorporate appendices. No frills for
+when you just want to focus on the content. This template is based on the work
+done by Paul Bauer and Camille Landesvatter. See their
 \href{https://github.com/paulcbauer/Writing_a_reproducable_paper_in_pagedown}{GitHub repository}
-and the description of \code{pagedown::\link[pagedown]{jss_paged}} for
-more general information and context.
+and the description of \code{pagedown::\link[pagedown]{jss_paged}} for more
+general information and context.
 }
 \references{
 \url{https://pagedown.rbind.io}
