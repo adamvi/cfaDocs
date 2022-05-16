@@ -73,11 +73,13 @@ cfa_paged = function(
     template <- cfa_paged_res("cfa", "pandoc", "cfa_paged.html")
 
   if (tolower(css) == "default")
-    css <- grep("cfa-", list.files(cfa_paged_res("cfa", "css")), value = TRUE)
+    css <- file.path("rmarkdown/templates/pagedown/cfa/css",
+                     grep("cfa-", list.files(cfa_paged_res("cfa", "css")), value = TRUE))
 
   if (all(identical(tolower(paged_img), "default"))) {
     paged_img <- c(
-      file.path("rmarkdown/templates/pagedown/cfa/img", c("cfa-front-cover.svg", "cfa-footer.svg")),
+      file.path("rmarkdown/templates/pagedown/cfa/img", 
+              c("cfa-front-cover.svg", "cfa-footer.svg")),
       file.path("rmarkdown/shared_resources/img", "cfa-logo.svg"))
     names(paged_img) <- gsub(".svg", "", basename(paged_img))
   } else {
@@ -122,17 +124,6 @@ dep_css = function(styshts) {
     all_files = FALSE
   )
 }
-
-# dep_css = function(styshts) {
-#   htmltools::htmlDependency(
-#     name = "css",
-#     version = utils::packageVersion("cfaDocs"),
-#     package = "cfaDocs",
-#     src = c(file = "rmarkdown/templates/pagedown/cfa/css"),
-#     stylesheet = styshts,
-#     all_files = FALSE
-#   )
-# }
 
 dep_js = function() {
   htmltools::htmlDependency(
