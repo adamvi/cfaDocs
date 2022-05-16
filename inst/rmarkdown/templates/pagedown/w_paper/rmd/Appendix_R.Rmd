@@ -8,7 +8,6 @@
   options(table_counter_str = paste0("**Table ", prefix, "%s:**")) # "**Table A%s:**"
   options(fig_num_str = paste0(prefix, "%d")) # Prepend Appendix Letter when using figNum()
   options(fig_caption_no_sprintf = paste0("**Figure ", prefix, "%d:** %s")) # "**Figure A%d:** %s"
-
 ```
 
 # Documenting the Computational Environment
@@ -88,7 +87,7 @@ namespace_pkgs_alpha, sep = "\n\n")
 
 <!--  End appendix format: re-start counters and change back to numeric for subsequent re-rendering-->
 
-```{r, cache=FALSE, echo=FALSE}
+```{r r-session-reset, cache=FALSE, echo=FALSE}
 	options(table_counter_str = NULL)
 	options(table_num_str = NULL)
 	options(fig_caption_no_sprintf = NULL)
@@ -102,7 +101,7 @@ namespace_pkgs_alpha, sep = "\n\n")
 To simply attach all the code you used in the PDF file in the appendix see the R
 chunk in the underlying `.rmd` file:
 
-```{r, allrcode, ref.label=knitr::all_labels(echo == TRUE), echo=TRUE, eval=FALSE, results='asis'}
+```{r allrcode, ref.label=knitr::all_labels(echo == TRUE), echo=TRUE, eval=FALSE, results='asis'}
 ```
 -->
 

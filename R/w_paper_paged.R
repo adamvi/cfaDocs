@@ -53,14 +53,14 @@
 #' @references \url{https://pagedown.rbind.io}
 #' @rdname w_paper_paged
 #' @import pagedown
+#' @import rmarkdown 
 #' @importFrom htmltools htmlDependency tagList
-#' @importFrom utils packageVersion 
 #' @export
 
 w_paper_paged = function(
   ...,
   appendices = list(
-    post = list(R = list(file = "r_session_info"))),
+    post_knit = list(R = list(file = "r_session_info"))),
   template = "default",
   css = "default",
   csl = "default",
@@ -87,15 +87,17 @@ w_paper_paged = function(
   if (!is.null(appendices)) {
     ##  Get appendix prefix name(s)
     appdx_prefix <- NULL
-    for (nm in names(appendices[])) {
+    for (nm in tolower(names(appendices))) {
       pfx <- names(appendices[[nm]])
       if (is.null(pfx)) pfx <- "null"
       appdx_prefix <- c(appdx_prefix, pfx)
     }
 
     if (!is.null(appdx_prefix) & !all(appdx_prefix == "null")) {
-      pandoc_args <- c(pandoc_args, "--metadata", 
-        paste0("appendix-prefix=", paste(appdx_prefix, collapse=", ")))
+      prefix_md <- tempfile(pattern = "prefix-", fileext = ".md")
+      cat(paste0("appendix-prefix: [", paste(appdx_prefix, collapse=", "), "]"),
+          sep="\n", file = prefix_md)
+      pandoc_args <- c(pandoc_args, "--metadata-file", prefix_md)
     }
 
     ##  Appendix file(s) passed through arguments will be passed to the pandoc template 
@@ -105,15 +107,10 @@ w_paper_paged = function(
     
     ##  Create the markdown meta-data file passed to pandoc and list of text to include
     cat(c("appendix: |", "  "), sep="\n", file = metadata_md)
-    
-    ##  Create an empty list object to be populated with appendix text (and ordered according to names)
-    # apndx_list <- list()
-
-    # if ()
   }
 
   wp_format = pagedown:::html_format(
-    # ...,
+    ...,
     template = template, css = NULL, csl = csl, number_sections = number_sections,
     self_contained = self_contained, anchor_sections = anchor_sections, 
     mathjax = mathjax, theme = NULL, highlight = NULL,
@@ -136,67 +133,115 @@ w_paper_paged = function(
     wp_format$knitr$opts_chunk[[i]] = opts_wp[[i]]
   }
 
-# appendices = list(post = list(R = list(file = "r_session_info", title="R things"), T = list(file="my/test/doc.Rmd", title="Analysis stuff")))
-# appendices = list(post = list(`R-` = list(file = "r_session_info"), T = list(file="my/test/doc.Rmd", title="Analysis stuff")))
-# appendices = list(post = list(R = list(file = "r_session_info")), pre = list(T = list(file="my/test/doc.Rmd", title="Analysis stuff")))
+  ##  Set up output format for rendered, pre_ & post_knit appendices if requested
 
-  nms <- function(n) unlist(appendices[[n]][]) # unlist(lapply(appendices[[n]], function(f) f[["file"]]), use.names = F)
+  if (!is.null(appendices)) {
+    nms <- function(n) unlist(appendices[[n]][]) # unlist(lapply(appendices[[n]], function(f) f[["file"]]), use.names = F)
 
-  if (!is.null(appendices[["post"]])) {
-    if ("r_session_info" %in% nms("post")) {
-      rses <- which(unlist(lapply(appendices[["post"]][], function(f) f[["file"]] == "r_session_info")))
-      appendices[["post"]][[rses]][["file"]] <- cfa_paged_res("w_paper", "rmd", "Appendix_R.Rmd")
-
-      if (is.null(appendices[["post"]][[rses]][["title"]])) {
-        appendices[["post"]][[rses]][["title"]] <- paste("Appendix", gsub("[[:punct:]]", "", names(rses)))
-        appendices[["post"]][[rses]][["subtitle"]] <- "System and Software Information"
-      }
-    }
-
-    # wp_format$post_knit_orig <- wp_format$post_knit
-    wp_format$post_knit = function(
-      front_matter, knit_input, runtime, encoding,  # this line are args passed internally - put first and in order!
-      postk_apnd = appendices[["post"]], tmp_file = metadata_md) {
-        # op(base(...), overlay(...)) # original wp_format$post_knit
-        for (i in sequence(length(postk_apnd))) {
-          
+    ##  Pre-knit rendering of appendices:
+    if (!is.null(appendices[["pre_knit"]])) {
+      wp_format$pre_knit = function(
+      input, # internal args passed to pre_knit function - put first and in order!
+      # custom args for post-knit rendering of appendices:
+      apnd_prek = appendices[["pre_knit"]], metadata_file = metadata_md) {
+        for (i in sequence(length(apnd_prek))) {
           to_pandoc <- NULL
-          title <- postk_apnd[[i]][["title"]]
-          prefix <- names(postk_apnd)[i]
+          title <- apnd_prek[[i]][["title"]]
+          prefix <- names(apnd_prek)[i]
           if (!is.null(title))
             to_pandoc <- c("--metadata", paste0("title=", title))
           if (!is.null(prefix))
             to_pandoc <- c(to_pandoc, "--metadata", paste0("appendix-prefix=", prefix))
-        
-        #   if (exists("params")) {
-        # #     tmp_env <- environment()
-        # #     try(if(bindingIsLocked("params", env = tmp_env)) unlockBinding("params", env = tmp_env))  #  required if params is sent in through YAML
-        # #     params$prefix <- prefix
-        # #   } else {
-        #     rm(params);gc()
-        #     params <- list(prefix = prefix)
-        #   }
-        #   params <- list(prefix = prefix)
 
-        # anotherway <- prefix # WORKS! Duh...
-
-          res <- rmarkdown::render(postk_apnd[[i]][["file"]], 
-                     output_format = rmarkdown::html_document(
-                     template = cfa_paged_res("w_paper", "pandoc", "wp_appendix.html"),
-                     number_sections = number_sections,
-                     self_contained = self_contained,
-                     anchor_sections = anchor_sections,
-                     mathjax = mathjax, theme = NULL, highlight = NULL,
-                     pandoc_args = to_pandoc), # , params = list(prefix = prefix)
-                   output_dir = tempdir()) # , quiet = TRUE, envir = new.env()
-          cat(readLines(res), sep = "\n  ", file = tmp_file, append = TRUE)
+          res <- rmarkdown::render(apnd_prek[[i]][["file"]], 
+                                   output_format = rmarkdown::html_document(
+                                     template = cfa_paged_res("w_paper", "pandoc", "wp_appendix.html"),
+                                     number_sections = number_sections,
+                                     self_contained = self_contained,
+                                     anchor_sections = anchor_sections,
+                                     mathjax = mathjax, theme = NULL, highlight = NULL,
+                                     pandoc_args = to_pandoc),
+                                   output_dir = tempdir())
+        }
       }
     }
-  }
 
-  
-#   cat(readLines(res), sep = "\n  ", file = tmp_file, append = TRUE)
+    wp_format$post_knit = function(
+      # internal args passed to post_knit function - put first and in order!
+      front_matter, knit_input, runtime, encoding,
+      # custom args for post-knit rendering of appendices
+      apndcs_arg = appendices, metadata_file = metadata_md) {
+        ##  Post-knit rendering of appendices:
+        if (!is.null(apndcs_arg[["post_knit"]])) {
+          if ("r_session_info" %in% nms("post_knit")) {
+            rses <- which(unlist(lapply(apndcs_arg[["post_knit"]][], function(f) f[["file"]] == "r_session_info")))
+            apndcs_arg[["post_knit"]][[rses]][["file"]] <- cfa_paged_res("w_paper", "rmd", "Appendix_R.Rmd")
 
+            if (is.null(apndcs_arg[["post_knit"]][[rses]][["title"]])) {
+              apndcs_arg[["post_knit"]][[rses]][["title"]] <- paste("Appendix", gsub("[[:punct:]]", "", names(rses)))
+              apndcs_arg[["post_knit"]][[rses]][["subtitle"]] <- "System and Software Information"
+            }
+          }
+
+          for (i in sequence(length(apndcs_arg[["post_knit"]]))) {
+            to_pandoc <- NULL
+            title <- apndcs_arg[["post_knit"]][[i]][["title"]]
+            prefix <- names(apndcs_arg[["post_knit"]])[i]
+            if (!is.null(title))
+              to_pandoc <- c("--metadata", paste0("title=", title))
+            if (!is.null(prefix))
+              to_pandoc <- c(to_pandoc, "--metadata", paste0("appendix-prefix=", prefix))
+
+            rmarkdown::render(apndcs_arg[["post_knit"]][[i]][["file"]], 
+                              output_format = rmarkdown::html_document(
+                                template = cfa_paged_res("w_paper", "pandoc", "wp_appendix.html"),
+                                number_sections = number_sections,
+                                self_contained = self_contained,
+                                anchor_sections = anchor_sections,
+                                mathjax = mathjax, theme = NULL, highlight = NULL,
+                                pandoc_args = to_pandoc),
+                              output_dir = tempdir())
+          }
+        }
+
+        ##  Create an empty list object to be populated with appendix text (and ordered according to names)
+        apndx_list <- list()
+
+        if ("rendered" %in% tolower(names(apndcs_arg))) {
+          for (nm in names(apndcs_arg[["rendered"]])) {
+            tmp.file <- apndcs_arg[["rendered"]][[nm]][["file"]]
+            if (!grepl(".html", tolower(basename(tmp.file))))
+              stop("\n\t'rendered' appendices must be a .html file.")
+            apndx_list[[nm]] <- readLines(tmp.file)
+          }
+        }
+            
+        if ("pre_knit" %in% tolower(names(apndcs_arg))) {
+          for (nm in names(apndcs_arg[["pre_knit"]])) {
+            tmp.file <- file.path(tempdir(),
+                                  gsub(".rmd|.Rmd|.RMD", ".html",
+                                  basename(apndcs_arg[["pre_knit"]][[nm]][["file"]])))
+            apndx_list[[nm]] <- readLines(tmp.file)
+          }
+        }
+
+        if ("post_knit" %in% tolower(names(apndcs_arg))) {
+          for (nm in names(apndcs_arg[["post_knit"]])) {
+            tmp.file <- file.path(tempdir(),
+                                  gsub(".rmd|.Rmd|.RMD", ".html",
+                                  basename(apndcs_arg[["post_knit"]][[nm]][["file"]])))
+            apndx_list[[nm]] <- readLines(tmp.file)
+          }
+        }
+
+        # order/sort apndx_list by prefix
+        apndx_list <- apndx_list[order(names(apndx_list))]
+
+        for (APNDX in names(apndx_list)) {
+          cat(apndx_list[[APNDX]], sep = "\n  ", file = metadata_file, append = TRUE)
+        }
+    }  #  END wp_format$post_knit
+  }  #  END `appendices`
 
   wp_format
 }
