@@ -14,6 +14,10 @@ cfa_shared_res = function(...) {
   system.file( "rmarkdown", "shared_resources", ..., package = "cfaDocs", mustWork = TRUE)
 }
 
+trimWhiteSpace <- function(line) gsub("(^ +)|( +$)", "", line)
+
+"%w/o%" <- function(x,y) x[!x %in% y]
+
 
 # Utils adapted from `xaringan`
 

@@ -1,48 +1,94 @@
----
-title: "Appendix R"
-appendix-prefix: "R"
-output:
-  html_document:
-    template: ../assets/pandoc/wp_appendix.html
-    self_contained: true
----
 
-<!--
-  This document is intended to be rendered from the "Child_RMD" directory.
--->
+```{r appendix-r-setup, results='asis', echo=FALSE}
+  ###   Set Table, Figure and Equation Counters
+  # the object `prefix` is defined in the function `w_paper_paged`
+  cfaDocs::setCounters()
+  options(table_counter=FALSE)
+  options(table_num_str = paste0(prefix, "%d")) # Prepend Appendix Letter when using tblNum()
+  options(table_counter_str = paste0("**Table ", prefix, "%s:**")) # "**Table A%s:**"
+  options(fig_num_str = paste0(prefix, "%d")) # Prepend Appendix Letter when using figNum()
+  options(fig_caption_no_sprintf = paste0("**Figure ", prefix, "%d:** %s")) # "**Figure A%d:** %s"
 
-# R Session Information
+```
+
+# Documenting the Computational Environment
 
 Since `R` [@Rsoftware2022] and `R` packages are constantly evolving, it is critical to
-document information on the software version and packages that were loaded and system
-platform used during analyses and reporting [@Bauer2018-dl]. This appendix provides the
-`R` and system specifications used in the creation of do this report and its associated
-analyses.
+document information such as software package versions (primary and auxilary) and the
+computer system platform used during analyses and reporting [@Bauer2018-dl]. This appendix
+provides the `R` and system specifications used in the analyses and creation of this report.
 
-```{r r-session-info, echo=FALSE}
-# set width option to force fit onto page margins
-# options(width=75)
-# print(sessionInfo(), locale = FALSE)
-# when using child='Appendix_*.Rmd'
-# knitr::knit_print(capture.output(print(sessionInfo(), locale = FALSE)))
-pander::pander(sessionInfo(), compact = FALSE, locale=FALSE)
+##  General `R` software and system information
 
-  #r-session-platform, fig.cap="R Session Platform Information", out.width="0", out.height="0", out.extra=tab.out.ex, class = "figtab", results="asis"}
-	###  Include VERY small, transparent image to create table title and
+```{r r-session-platform, echo=FALSE}
+  r_session_info <- devtools::session_info()
+  session_platform <- data.frame(unlist(r_session_info$platform))
+  names(session_platform) <- "Value"
+  session_platform$Setting <- rownames(session_platform)
+  row.names(session_platform) <- NULL
+  
+  knitr::knit_print(
+		htmlTable::htmlTable(as.matrix(session_platform[, c(2,1)]), align='rr',
+	    caption = cfaDocs::tblCap(("Platform Information for R Session"))))
+  ##  This might be needed for cfa_paged style appendix:
+  # r-session-platform, fig.cap="R Session Platform Information", out.width="0", out.height="0", out.extra=tab.out.ex, class = "figtab", results="asis"}
+	##  Include VERY small, transparent image to create table title and
 	# knitr::include_graphics("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", dpi=NA, error = FALSE)
-  #
-  # session_platform <- as.data.table(unlist(devtools::session_info()$platform), keep.rownames=T)[V1 != "tz"]
-  # setnames(session_platform, c("Setting", "Value"))
-  # row.names(session_platform) <- NULL
-  #
-  # knitr::knit_print(
-	# 	htmlTable::htmlTable(as.matrix(session_platform), align='rr',
-	#     caption = tblCap(knitr::opts_current$get("fig.cap"))))
+```
+
+<br/>
+
+##  Attached and loaded `R` packages
+
+The following packages (non-base `R`) were attached:
+
+
+```{r r-session-packages, echo=FALSE}
+  trim_source <- function(txt){
+    split.at <- strsplit(txt, "@")[[1]]
+    git.commit <- substr(split.at[2], 1, 7)
+    if (!is.na(git.commit)) {
+      paste0("    ", split.at[1], "@", git.commit, ")")
+    } else txt
+  }
+
+  session_packages <- data.frame(r_session_info$packages, row.names = NULL)
+
+  namespace_pkgs <- subset(session_packages, attached == FALSE, 
+                           select = c(package, loadedversion))
+  namespace_pkgs$alph <- toupper(unlist(lapply(namespace_pkgs$package, substr, 1, 1)))
+  namespace_pkgs_alpha <- NULL
+  for (n in unique(namespace_pkgs$alph)) {
+    chnk <- subset(namespace_pkgs, alph == n)
+    chnk <- paste0("**", chnk$package, "**", " *(", chnk$loadedversion, ")*")
+    chnk <- paste(chnk, collapse = ", ")
+    namespace_pkgs_alpha <- c(namespace_pkgs_alpha, chnk)
+  }
+
+  attached_pkg <- subset(session_packages, attached == TRUE, 
+                         select = c(package, loadedversion, source, date))
+  attached_pkg$source <- unlist(lapply(attached_pkg$source, trim_source))
+  attached_pkg$date <- format(as.Date(attached_pkg$date), "%m/%d/%Y")
+  names(attached_pkg) <- c("Package", "Version", "Source", "Date Installed")
+  row.names(attached_pkg) <- NULL
+  
+  knitr::knit_print(
+		htmlTable::htmlTable(as.matrix(attached_pkg), align='rrrr',
+	    caption = cfaDocs::tblCap("Attached R Packages for R Session")))
+```
+
+<br/>
+
+In addition to the attached packages in the table above, the following packages were loaded via a namespace (and not attached):
+
+```{r r-session-nmspc-pkgs, results='asis', echo=FALSE}
+  cat(
+namespace_pkgs_alpha, sep = "\n\n")
 ```
 
 <!--  End appendix format: re-start counters and change back to numeric for subsequent re-rendering-->
 
-```{r, cache=FALSE, results='asis', echo=FALSE}
+```{r, cache=FALSE, echo=FALSE}
 	options(table_counter_str = NULL)
 	options(table_num_str = NULL)
 	options(fig_caption_no_sprintf = NULL)
@@ -60,7 +106,7 @@ chunk in the underlying `.rmd` file:
 ```
 -->
 
-<br><br><br>
+<br/><br/>
 
 # References {-}
 
