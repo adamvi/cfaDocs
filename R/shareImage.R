@@ -49,6 +49,8 @@ shareImage = function(
           sub(pattern = "(.*)\\..*$", replacement = "\\1", basename(slides_rmd)), 
           "_share_image.png")
       out.fname <- file.path(out.dir, out.fname)
+    } else {
+      out.fname <- path_image
     }
     
     rmd_yaml <- rmarkdown::yaml_front_matter(slides_rmd)

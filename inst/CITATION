@@ -4,10 +4,10 @@ citEntry(entry = "Manual",
          title        = "{cfaDocs}: Content Creation and Development Via R.",
          author       = personList(as.person("Adam R. Van Iwaarden"), as.person("Damian W. Betebenner")),
          year         = "2022",
-         note         = "R package version 0.0-1.7",
+         note         = "R package version 0.0-1.8",
          url          = "https://centerforassessment.github.io/cfaDocs/",
 
          textVersion  = paste("Adam R. Van Iwaarden and Damian W. Betebenner (2022).",
                         "Literasee: Content Creation and Development Via R.",
-                        "(R package version 0.0-1.7)",
+                        "(R package version 0.0-1.8)",
                         "URL: https://centerforassessment.github.io/cfaDocs/"))
