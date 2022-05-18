@@ -71,11 +71,10 @@
   background-color: white;
   color: var(--cfa-primary);
   background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/cfa-long-logo.svg),
-                    url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/cfa-octocat-corner.svg),
                     url(https://mirrors.creativecommons.org/presskit/cc.logo.svg),
                     url(https://mirrors.creativecommons.org/presskit/icons/by.svg);
-  background-size: 25%, 10%, 50%, 2.125%;
-  background-position: top 10% left 10%, bottom 2.5% right 3%, top 0% right 0%, bottom 2.5% right 0.5%;
+  background-size: 25%, 50%, 2.125%;
+  background-position: top 10% left 10%, bottom 2.5% right 3%, bottom 2.5% right 0.5%;
   border-right: 150px solid var(--cfa-green);
   height: 250px;
 }
