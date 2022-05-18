@@ -23,10 +23,7 @@
   z-index: 1;
 }
 
-.github-corner:hover .octo-arm {
-  -webkit-animation: octocat-wave 560ms ease-in-out;
-  animation: octocat-wave 560ms ease-in-out;
-}
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
 
 .github-corner svg {
   color: var(--cfa-green);
@@ -72,11 +69,10 @@
   background-color: white;
   color: var(--cfa-primary);
   background-image: url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/CFA_Logo_alpha_07.svg),
-                    url(https://raw.githubusercontent.com/CenterForAssessment/cfaDocs/main/inst/rmarkdown/shared_resources/img/cfa-octocat-corner.svg),
                     url(https://mirrors.creativecommons.org/presskit/cc.logo.svg),
                     url(https://mirrors.creativecommons.org/presskit/icons/by.svg);
-  background-size: contain, 10%, 10%, 2.125%;
-  background-position: center, top 0% right 0%, bottom 2.5% right 3%, bottom 2.5% right 0.5%;
+  background-size: contain, 10%, 2.125%;
+  background-position: center, bottom 2.5% right 3%, bottom 2.5% right 0.5%;
   border-right: 100px solid var(--cfa-green);
   height: 250px;
   border-left: 100px solid var(--cfa-green);
