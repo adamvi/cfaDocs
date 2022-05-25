@@ -6,7 +6,7 @@
 \usage{
 w_paper_paged(
   ...,
-  appendices = list(post = list(R = list(file = "r_session_info"))),
+  appendices = list(post_knit = list(R = list(file = "r_session_info"))),
   template = "default",
   css = "default",
   csl = "default",
