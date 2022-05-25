@@ -18,6 +18,8 @@ Imports:
         webshot2,
         xaringan,
         yaml
+Remotes:
+    gadenbuie/xaringanExtra
 SystemRequirements: pandoc (>= 2.14) - http://johnmacfarlane.net/pandoc
 LazyData: Yes
 LazyDataCompression: xz
