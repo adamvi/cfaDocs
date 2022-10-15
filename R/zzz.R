@@ -7,6 +7,6 @@
       packageStartupMessage(crayon::magenta$bold("cfaDocs",
         paste(paste0(unlist(strsplit(as.character(utils::packageVersion("cfaDocs")), "[.]")),
         c(".", "-", ".", "")), collapse = ""),
-        " (5-25-2022). For help visit https://centerforassessment.github.io/cfaDocs"))
+        " (10-15-2022). For help visit https://centerforassessment.github.io/cfaDocs"))
   }
 }

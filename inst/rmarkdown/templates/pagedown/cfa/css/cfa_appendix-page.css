@@ -62,7 +62,7 @@ html {
 /* --------------------- Page style ----------------------- */
 /* Add colorbar to all pages (first and last are overriden later) */
 @page {
-  background-image: url(../images/footer-bar.svg);
+  background-image: var(--cfa-footer);
   background-position: bottom 0in left;
   background-size: contain;
   background-repeat: no-repeat;
@@ -107,8 +107,9 @@ caption {
 
 
 /* --------------------- Cover Page ------------------ */
-@page:first{ /**/
-  background-image: url(../images/nciea-appendix-cover.svg); /* var(--back-cover); */
+@page:first{
+  background-color: #ffffff;
+  background-image: var(--cfa-front-cover); /* defaults to cfa-appendix-cover.svg */
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -133,7 +134,7 @@ caption {
 
 @page frontmatter {
   @bottom-center {
-      content: "- " counter(page, lower-roman) " -";
+      content: counter(page, lower-roman);
       color: #279F27;
       margin-top: 1.8cm;
       margin-bottom: 1cm;
@@ -154,7 +155,7 @@ caption {
 
 @page maincontent {
   @bottom-center {
-      content: var(--appendix-prefix, "A") " - " counter(page);
+      content: var(--appendix-prefix) " - " counter(page);
       color: #279F27;
       margin-top: 1.8cm;
       margin-bottom: 1cm;
@@ -190,7 +191,7 @@ caption {
 /* ------------------ Table of Contents/Figures/Tables formatting ----------------- */
 /* TOC title */
 .toc-title, .lof h1, .lot h1 {
-  font-size: 24pt;
+  font-size: 20pt;
   font-weight: 900;
   background-color: #ffffff;
 /*  color: #FF0000; */
@@ -208,6 +209,7 @@ caption {
     list-style: none;
     padding-left: 0;
     overflow-x: hidden;
+    text-align: left;
 }
 
 .toc li li, .lof li li, .lot li li {

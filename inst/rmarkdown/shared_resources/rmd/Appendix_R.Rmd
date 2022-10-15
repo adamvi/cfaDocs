@@ -1,25 +1,31 @@
 
-```{r appendix-r-setup, results='asis', echo=FALSE}
+```{r appendix-r-setup, results = "asis", echo = FALSE}
   ###   Set Table, Figure and Equation Counters
-  # the object `prefix` is defined in the function `w_paper_paged`
+  #     - `prefix` is defined in the function `w_paper_paged`
+  #     - manually define if available as YAML variable/meta-data
+  if (!exists("prefix")) {
+    prefix <- rmarkdown::metadata$`appendix-prefix`
+  }
+  
   cfaDocs::setCounters()
-  options(table_counter=FALSE)
+  options(table_counter = FALSE)
   options(table_num_str = paste0(prefix, "%d")) # Prepend Appendix Letter when using tblNum()
   options(table_counter_str = paste0("**Table ", prefix, "%s:**")) # "**Table A%s:**"
   options(fig_num_str = paste0(prefix, "%d")) # Prepend Appendix Letter when using figNum()
   options(fig_caption_no_sprintf = paste0("**Figure ", prefix, "%d:** %s")) # "**Figure A%d:** %s"
 ```
 
-# Documenting the Computational Environment
+# Computational Environment
 
-Since `R` [@Rsoftware2022] and `R` packages are constantly evolving, it is critical to
-document information such as software package versions (primary and auxilary) and the
-computer system platform used during analyses and reporting [@Bauer2018-dl]. This appendix
-provides the `R` and system specifications used in the analyses and creation of this report.
+Since `R` and `R` packages are constantly evolving, it is critical to document
+information such as software package versions (primary and auxilary) and the
+computer system platform used in data analyses and report generation. This
+appendix provides the `R` and system specifications used in the creation of
+this report.
 
 ##  General `R` software and system information
 
-```{r r-session-platform, echo=FALSE}
+```{r r-session-platform, echo = FALSE}
   r_session_info <- devtools::session_info()
   session_platform <- data.frame(unlist(r_session_info$platform))
   names(session_platform) <- "Value"
@@ -27,12 +33,8 @@ provides the `R` and system specifications used in the analyses and creation of 
   row.names(session_platform) <- NULL
   
   knitr::knit_print(
-		htmlTable::htmlTable(as.matrix(session_platform[, c(2,1)]), align='rr',
-	    caption = cfaDocs::tblCap(("Platform Information for R Session"))))
-  ##  This might be needed for cfa_paged style appendix:
-  # r-session-platform, fig.cap="R Session Platform Information", out.width="0", out.height="0", out.extra=tab.out.ex, class = "figtab", results="asis"}
-	##  Include VERY small, transparent image to create table title and
-	# knitr::include_graphics("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", dpi=NA, error = FALSE)
+    htmlTable::htmlTable(as.matrix(session_platform[, c(2,1)]), align = "rr",
+      caption = cfaDocs::tblCap(("Platform Information for R Session"))))
 ```
 
 <br/>
@@ -42,7 +44,7 @@ provides the `R` and system specifications used in the analyses and creation of 
 The following packages (non-base `R`) were attached:
 
 
-```{r r-session-packages, echo=FALSE}
+```{r r-session-packages, echo = FALSE}
   trim_source <- function(txt){
     split.at <- strsplit(txt, "@")[[1]]
     git.commit <- substr(split.at[2], 1, 7)
@@ -72,42 +74,15 @@ The following packages (non-base `R`) were attached:
   row.names(attached_pkg) <- NULL
   
   knitr::knit_print(
-		htmlTable::htmlTable(as.matrix(attached_pkg), align='rrrr',
-	    caption = cfaDocs::tblCap("Attached R Packages for R Session")))
+    htmlTable::htmlTable(as.matrix(attached_pkg), align = "rrrr",
+      caption = cfaDocs::tblCap("Attached R Packages for R Session")))
 ```
 
 <br/>
 
 In addition to the attached packages in the table above, the following packages were loaded via a namespace (and not attached):
 
-```{r r-session-nmspc-pkgs, results='asis', echo=FALSE}
+```{r r-session-nmspc-pkgs, results = "asis", echo = FALSE}
   cat(
 namespace_pkgs_alpha, sep = "\n\n")
 ```
-
-<!--  End appendix format: re-start counters and change back to numeric for subsequent re-rendering-->
-
-```{r r-session-reset, cache=FALSE, echo=FALSE}
-	options(table_counter_str = NULL)
-	options(table_num_str = NULL)
-	options(fig_caption_no_sprintf = NULL)
-	options(fig_num_str = NULL)
-```
-
-<!-- ## All the code in the paper
-
-*** NOTE: This doesn't work when your using `child = ` in the "parent" .Rmd file!!! ***
-
-To simply attach all the code you used in the PDF file in the appendix see the R
-chunk in the underlying `.rmd` file:
-
-```{r allrcode, ref.label=knitr::all_labels(echo == TRUE), echo=TRUE, eval=FALSE, results='asis'}
-```
--->
-
-<br/><br/>
-
-# References {-}
-
-::: {#refs_appndxR}
-:::

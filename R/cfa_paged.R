@@ -9,6 +9,8 @@
 #'   and/or \code{rmarkdown::\link[rmarkdown]{html_document_base}}.
 #' @param template The path to the Pandoc template to convert Markdown to HTML.
 #'   The \code{'default'} will use the 'cfa_paged.html' template from this package.
+#'   Additionally, the character string \code{'appendix'} may be provided to
+#'   use the package 'cfa_appendix.html' template.
 #' @param paged_img The images to be used as CSS variables for the cover, footer,
 #'   and other uses. Defaults are 'cfa-front-cover.svg', 'cfa-footer.svg', and
 #'   'cfa-logo.svg'. Note that if customized this should be a named character string
@@ -69,30 +71,50 @@ cfa_paged = function(
   pandoc_args = NULL
 ) {
 
-  if (tolower(template) == "default")
-    template <- cfa_paged_res("cfa", "pandoc", "cfa_paged.html")
+  appendix.tf <- ifelse(identical(tolower(template), "appendix"), TRUE, FALSE)
 
-  if (tolower(css) == "default")
-    css <- file.path("rmarkdown/templates/pagedown/cfa/css",
-                     grep("cfa-", list.files(cfa_paged_res("cfa", "css")), value = TRUE))
+  if (identical(tolower(template), "default")) {
+    template <- cfa_paged_res("cfa", "pandoc", "cfa_paged.html")
+  }
+  if (appendix.tf) {
+    template <- cfa_paged_res("cfa", "pandoc", "cfa_appendix.html")
+  }
+
+  if (tolower(css) == "default") {
+    css <-
+      file.path(
+        "rmarkdown/templates/pagedown/cfa/css",
+        grep("cfa-", list.files(cfa_paged_res("cfa", "css")), value = TRUE)
+      )
+    if (appendix.tf) css <- gsub("cfa-page", "cfa_appendix-page", css)
+  }
 
   if (all(identical(tolower(paged_img), "default"))) {
     paged_img <- c(
-      file.path("rmarkdown/templates/pagedown/cfa/img", 
-              c("cfa-front-cover.svg", "cfa-footer.svg")),
-      file.path("rmarkdown/shared_resources/img", "cfa-logo.svg"))
-    names(paged_img) <- gsub(".svg", "", basename(paged_img))
+      file.path(
+        "rmarkdown/templates/pagedown/cfa/img",
+        c(ifelse(appendix.tf,"cfa-appendix-cover.svg", "cfa-front-cover.svg"),
+          "cfa-footer.svg"
+        )
+      ),
+      file.path("rmarkdown/shared_resources/img", "cfa-logo.svg")
+    )
+    names(paged_img) <- c("cfa-front-cover", "cfa-logo") # gsub(".svg", "", basename(paged_img))
   } else {
-    if (is.null(names(paged_img))) 
+    if (is.null(names(paged_img))) {
       stop("\n\tThe `paged_img` argument must be a named character vector.\n\n")
+    }
 
-    if (!all(grepl("^cfa-", names(paged_img))))
+    if (!all(grepl("^cfa-", names(paged_img)))) {
       names(paged_img) <- paste0("cfa-", names(paged_img))
+    }
 
-    if (!all(names(paged_img) %in% c("cfa-front-cover", "cfa-footer", "cfa-logo")))
+    if (!all(names(paged_img) %in% c("cfa-front-cover", "cfa-footer", "cfa-logo"))) {
       stop("\n\tThe names of `paged_img` argument must be:
             \t\t'front-cover', 'footer' and 'logo' OR
-            \t\t'cfa-front-cover', 'cfa-footer' and 'cfa-logo'\n\n")
+            \t\t'cfa-front-cover', 'cfa-footer' and 'cfa-logo'\n\n"
+      )
+    }
   }
 
   extra_deps <- cfa_dependencies(css, paged_img)

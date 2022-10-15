@@ -1,3 +1,8 @@
+# cfaDocs 0.0-1.10
+
+* More functions for `pagedown` backed reports added (`createReportScripts` and utilities migrated from `Literasee` package).
+* CFA report theme cleanup and additions
+
 # cfaDocs 0.0-1.5
 
 * Functions for `pagedown` backed reports added (CFA theme migrated from `Literasee` package & working paper from ).
