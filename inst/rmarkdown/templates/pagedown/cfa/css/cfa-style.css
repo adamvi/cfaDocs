@@ -84,7 +84,7 @@ h2.author {
 
 /* Levels of title */
 h1 {
-  font-size: 24pt;
+  font-size: 20pt;
   font-weight: 700;
   text-transform: uppercase;
 /*   background-color: #314160; */
@@ -95,7 +95,7 @@ h1 {
 }
 
 h2 {
-  font-size: 18pt;
+  font-size: 16pt;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -110,12 +110,14 @@ h3 {
 h4 {
   font-size: 11pt;
   font-weight: 400;
+  font-style: italic;
 }
 
 /* Normal paragraph */
 p {
   font-size: 11pt;
   font-weight: 300;
+  text-align: justify;
 }
 
 /* Links */
@@ -232,14 +234,17 @@ table {
 }
 
 /* ----------------- List style ------------------- */
-ul {
+ul, ol {
   list-style-type: disc;
   font-weight: 300;
+  text-align: justify;
 }
 
 /* ----------------- Footnotes -------------------- */
 .footnotes {
   font-size: 90%;
+  padding-left: 2%;
+  text-indent: -2%;
 }
 .footnotes hr::before {
   content: "Footnotes:";
@@ -253,6 +258,7 @@ ul {
 
 .footnote-ref {
   text-decoration: none;
+  font-size: 75%;
 }
 
 .footnote sup {

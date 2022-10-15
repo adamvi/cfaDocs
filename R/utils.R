@@ -2,7 +2,7 @@
 
 # Given the path to a file, return a file:// URL.
 # Adapted slightly from webshot2 utils
-file_url <- function(filename) {
+file_url = function(filename) {
   if (.Platform$OS.type == "windows") {
     paste0("file://", normalizePath(filename, mustWork = TRUE))
   } else {
@@ -10,13 +10,31 @@ file_url <- function(filename) {
   }
 }
 
+fileExtension = function (filename, dot = TRUE) {
+  # remove a path
+  splitted <- strsplit(x = filename, split = "/")[[1]]
+  # or use .Platform$file.sep in stead of "/"
+  filename <- splitted [length(splitted)]
+  ext <- ""
+  splitted <- strsplit(x = filename, split = "\\.")[[1]]
+  l <- length (splitted)
+  if (l > 1 && sum(splitted[1:(l-1)] !=  "")) {
+    ext <-splitted [l]
+  }
+  # the extention must be the suffix of a non-empty name
+  if (dot) {
+    ext <- paste0(".", ext)
+  }
+  ext
+}
+
 cfa_shared_res = function(...) {
   system.file( "rmarkdown", "shared_resources", ..., package = "cfaDocs", mustWork = TRUE)
 }
 
-trimWhiteSpace <- function(line) gsub("(^ +)|( +$)", "", line)
+trimWhiteSpace = function(line) gsub("(^ +)|( +$)", "", line)
 
-"%w/o%" <- function(x,y) x[!x %in% y]
+`%w/o%` = function(x, y) x[!x %in% y]
 
 
 # Utils adapted from `xaringan`

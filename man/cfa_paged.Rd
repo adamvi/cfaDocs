@@ -24,7 +24,9 @@ cfa_paged(
 and/or \code{rmarkdown::\link[rmarkdown]{html_document_base}}.}
 
 \item{template}{The path to the Pandoc template to convert Markdown to HTML.
-The \code{'default'} will use the 'cfa_paged.html' template from this package.}
+The \code{'default'} will use the 'cfa_paged.html' template from this package.
+Additionally, the character string \code{'appendix'} may be provided to
+use the package 'cfa_appendix.html' template.}
 
 \item{paged_img}{The images to be used as CSS variables for the cover, footer,
 and other uses. Defaults are 'cfa-front-cover.svg', 'cfa-footer.svg', and

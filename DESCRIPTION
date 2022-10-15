@@ -1,8 +1,8 @@
 Package: cfaDocs
 Type: Package
 Title: Content Creation and Development Via R
-Version: 0.0-1.9
-Date: 2022-5-25
+Version: 0.0-1.10
+Date: 2022-10-15
 Description: A package for the development, creation and formatting of the Center for Assessments intellectual content.
 Authors@R: c(person(given=c("Adam", "R."), family="Van Iwaarden", email="avaniwaarden@nciea.org", role=c("aut", "cre")), 
              person(given=c("Damian", "W."), family="Betebenner", email="dbetebenner@nciea.org", role="aut"))
@@ -17,7 +17,8 @@ Imports:
         utils,
         webshot2,
         xaringan,
-        yaml
+        yaml,
+        ymlthis
 Remotes:
     gadenbuie/xaringanExtra
 SystemRequirements: pandoc (>= 2.14) - http://johnmacfarlane.net/pandoc
@@ -27,4 +28,4 @@ License: MIT + file LICENSE
 URL: https://github.com/CenterForAssessment/cfaDocs
 BugReports: https://github.com/CenterForAssessment/cfaDocs/issues
 ByteCompile: TRUE
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1

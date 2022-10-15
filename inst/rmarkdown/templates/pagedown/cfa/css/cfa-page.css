@@ -109,7 +109,7 @@ caption {
 @page:first{
   margin: 0 0 0 0;
   background-color: #ffffff;
-  background-image: var(--cfa-front-cover);
+  background-image: var(--cfa-front-cover); /* defaults to cfa-front-cover.svg */
   background-repeat: no-repeat;
   background-position: right center;
 
@@ -184,7 +184,7 @@ h3.abstract {
 
 @page frontmatter {
   @bottom-center {
-      content: "- " counter(page, lower-roman) " -";
+      content: counter(page, lower-roman);
       color: #279F27;
       margin-top: 1.8cm;
       margin-bottom: 1cm;
@@ -220,9 +220,11 @@ h3.abstract {
 
 /* ---------------------- Last page ----------------- */
 /* last page or back cover */
+/*
 .back-cover {
-  /* break-before: verso; */
+  break-before: verso;
 }
+*/
 
 /* .pagedjs_page:last-of-type {
   background-image: var(--cfa-logo);
@@ -243,7 +245,7 @@ h3.abstract {
 /* ------------------ Table of Contents/Figures/Tables formatting ----------------- */
 /* TOC title */
 .toc-title, .lof h1, .lot h1 {
-  font-size: 24pt;
+  font-size: 20pt;
   font-weight: 900;
   background-color: #ffffff;
 /*  color: #FF0000; */
@@ -261,6 +263,7 @@ h3.abstract {
     list-style: none;
     padding-left: 0;
     overflow-x: hidden;
+    text-align: left;
 }
 
 .toc li li, .lof li li, .lot li li {
@@ -291,7 +294,7 @@ h3.abstract {
 /* ------------------- Executive summary --------------------------- */
 /* title and subtitles style */
 .exec-summary h1 {
-  font-size: 24pt;
+  font-size: 20pt;
   font-weight: 900;
   background-color: #ffffff;
 /*  color: #FF0000; */
@@ -300,7 +303,7 @@ h3.abstract {
 }
 
 .exec-summary h2 {
-  font-size: 18pt;
+  font-size: 16pt;
   font-weight: 700;
   background-color: #ffffff;
   color: #000000;
@@ -332,5 +335,5 @@ h3.abstract {
 }
 
 .pull-quote p {
-  font-size: 16pt;
+  font-size: 14pt;
 }
