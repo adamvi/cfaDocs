@@ -41,7 +41,7 @@
   Acknowledgements:
   <br/>
   <p>
-  The Center for Assessment wants to thank `r ifelse(is.null(rmarkdown::metadata$acknowledgements), rmarkdown::metadata$client_organization, rmarkdown::metadata$acknowledgements)` for their contributions to the creation of this report.
+  `r ifelse(is.null(rmarkdown::metadata$acknowledgements), rmarkdown::metadata$client_organization, rmarkdown::metadata$acknowledgements)`
   </p>
   <br/>
   Suggested Citation:

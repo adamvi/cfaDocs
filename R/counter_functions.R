@@ -231,7 +231,7 @@ eqnNumIncrement <- function(advance.counter = 1) {
 #' @rdname eqnNum
 #' @export
 
-eqnNum <- function(advance.counter=0, eqn.name="t1", em.space=150) {
+eqnNum <- function(advance.counter = 0, eqn.name = "t1", em.space = 150) {
   pos <- 1
   if (!is.null(eqn.name)) {
     assign(eqn.name, getOption('equation_counter')+1, envir = as.environment(pos))

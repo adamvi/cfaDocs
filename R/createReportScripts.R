@@ -34,8 +34,8 @@ createReportScripts =
     function(
         params,
         content,
-        pagedown=TRUE,
-        bookdown=FALSE
+        pagedown = TRUE,
+        bookdown = FALSE
     ) {
     ###     Determine file order and paths before any YAML
 
@@ -134,8 +134,8 @@ createReportScripts =
           ymlthis::yml_title(addQuote(params$top.level$title)) |>
             ymlthis::yml_subtitle(addQuote(params$top.level$subtitle)) |>
               ymlthis::yml_author(
-                    name=addQuote(params$top.level$author.names),
-                    affiliation=addQuote(params$top.level$author.affil)
+                    name = addQuote(params$top.level$author.names),
+                    affiliation = addQuote(params$top.level$author.affil)
               ) |>
                 ymlthis::yml_date(
                     ifelse(
@@ -245,7 +245,7 @@ createReportScripts =
         extra.bd.files <-
             grep("references.Rmd|appendix.Rmd|appendices.Rmd",
                  list.files(content$bookdown$rmd.path),
-                 invert=TRUE, value = TRUE
+                 invert = TRUE, value = TRUE
             )
         if (length(extra.bd.files)) {
             bd.files <- c(bd.files, file.path(content$bookdown$rmd.path, extra.bd.files))
@@ -257,7 +257,7 @@ createReportScripts =
                 delete_merged_file = TRUE,
                 rmd_files = addQuote(bd.files) # paste0("[\n", paste0(addQuote(bd.files), collapse = ",\n"), "\n]")
             ) |>
-                writeYAML(filename = "_bookdown.yml", fences=FALSE, remove_scalar_style=TRUE)
+                writeYAML(filename = "_bookdown.yml", fences = FALSE, remove_scalar_style = TRUE)
     }
 
 
@@ -268,7 +268,7 @@ createReportScripts =
     if (pagedown) {
         pgdwn.rmd.yml <- top.yml |>
             ymlthis::yml_toplevel(
-                knit= "pagedown::chrome_print",
+                knit = "pagedown::chrome_print",
                 client_city = params$client.info$city.name,
                 client_state = params$client.info$state.abv,
                 client_organization = addQuote(params$client.info$organization)
@@ -364,7 +364,7 @@ createReportScripts =
         pd.filename <- file.path(pd.output.dir, paste0(pd.output.file, ".Rmd"))
         if (!dir.exists(pd.output.dir)) dir.create(pd.output.dir)
         writeYAML(yaml = pgdwn.rmd.yml, filename = pd.filename)
-        addCurrentDraft(config=params, filename = pd.filename)
+        addCurrentDraft(config = params, filename = pd.filename)
 
         ###     Add in content child chunks
         if (!is.null(content$pagedown$file.order)) {
@@ -522,7 +522,7 @@ createReportScripts =
                 }
 
                 writeYAML(yaml = tmp.appdx.yml, filename = tmp.apdx.fname)
-                addCurrentDraft(config=params, filename = tmp.apdx.fname)
+                addCurrentDraft(config = params, filename = tmp.apdx.fname)
 
                 tmp.code_chunk <-
                     paste0(

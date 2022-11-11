@@ -175,7 +175,7 @@ w_paper_paged = function(
         if (!is.null(apndcs_arg[["post_knit"]])) {
           if ("r_session_info" %in% nms("post_knit")) {
             rses <- which(unlist(lapply(apndcs_arg[["post_knit"]][], function(f) f[["file"]] == "r_session_info")))
-            apndcs_arg[["post_knit"]][[rses]][["file"]] <- cfa_paged_res("w_paper", "rmd", "Appendix_R.Rmd")
+            apndcs_arg[["post_knit"]][[rses]][["file"]] <- cfa_shared_res("rmd", "Appendix_R.Rmd")
 
             if (is.null(apndcs_arg[["post_knit"]][[rses]][["title"]])) {
               apndcs_arg[["post_knit"]][[rses]][["title"]] <- paste("Appendix", gsub("[[:punct:]]", "", names(rses)))

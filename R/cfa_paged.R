@@ -99,7 +99,7 @@ cfa_paged = function(
       ),
       file.path("rmarkdown/shared_resources/img", "cfa-logo.svg")
     )
-    names(paged_img) <- c("cfa-front-cover", "cfa-logo") # gsub(".svg", "", basename(paged_img))
+    names(paged_img) <- c("cfa-front-cover", "cfa-footer", "cfa-logo") # gsub(".svg", "", basename(paged_img))
   } else {
     if (is.null(names(paged_img))) {
       stop("\n\tThe `paged_img` argument must be a named character vector.\n\n")
