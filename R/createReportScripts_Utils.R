@@ -10,7 +10,7 @@ writeYAML =
     append_yaml = FALSE
   ) {
     clean.yaml <- gsub("'''", "\"", yaml::as.yaml(yaml, line.sep = "\n", column.major = FALSE))
-    clean.yaml <- gsub("''", "\"", clean.yaml)
+    clean.yaml <- gsub("''", "'", clean.yaml) # Was \" but this messes up apostrophies - i.e. Hawai'i, student's, etc.
     clean.yaml <- gsub("'[[]", "[", clean.yaml)
     clean.yaml <- gsub("[]]'", "]", clean.yaml)
     clean.yaml <- gsub("\n\n", "\n", clean.yaml)

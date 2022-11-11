@@ -1,0 +1,51 @@
+```{r, cache=FALSE, echo=FALSE}
+  if (is.list(rmarkdown::metadata$author)) {
+    auth.list <- list()
+    for(auth in seq(rmarkdown::metadata$author)) {
+      tmp.name <- rmarkdown::metadata$author[[auth]][["name"]]
+      if (length(rmarkdown::metadata$author[[auth]][["affiliation"]]) > 1L) {
+        tmp.affl <- rmarkdown::metadata$author[[auth]][["affiliation"]]
+        auth.list <- c(auth.list, paste0(tmp.name, " (", tmp.affl, ")"))
+      } else auth.list <- c(auth.list, tmp.name)
+    }
+    auth.text <- paste0("<p style=''margin-left: 30px;''>", paste(paste(head(auth.list, -1), collapse=",<br/>"), tail(auth.list, 1), sep=" and<br/>"), "</p>")
+    ###   One line HTML (vs block) alternative:
+    # auth.text <- paste(paste(head(auth.list, -1), collapse=", "), tail(auth.list, 1), sep=" and ")
+  } else {
+    auth.text <- paste(paste(head(rmarkdown::metadata$author, -1), collapse=", "), tail(rmarkdown::metadata$author, 1), sep=" and ")
+    auth.text <- paste0(auth.text, "\n<br/>\n<br/>\n")
+  }
+```
+  <img class = ''logo_abstract'' src = `r cfaDocs:::cfa_shared_res("img", "cfa-long-logo.svg")`>
+  <img class = ''color_rect_abstract'' src = `r cfaDocs:::cfa_paged_res("cfa", "img", "green-rectangle.svg")`>
+  <br/>
+  <h1 class = ''title'' style=''margin-top: 1%; margin-left: 1%; margin-right: -12%;'' >`r rmarkdown::metadata$title`</h1>
+  <h1 class = ''subtitle'' style=''margin-top: 1%; margin-left: 1%; margin-right: -12%;''>`r rmarkdown::metadata$subtitle`</h1>
+  <br/>
+  <br/>
+  Submitted to:
+  <p style=''margin-left: 30px;''>
+  `r inside_cover$client_name`<br/> 
+  `r inside_cover$client_organization`<br/>
+  `r ifelse(is.null(inside_cover$date), format(Sys.time(), format = "%B %Y"), inside_cover$date)`
+  </p>
+  <br/>
+  Author(s): `r auth.text`
+  <br/>
+  `r ifelse(!is.null(inside_cover$project_team), paste("Project Team:", inside_cover$project_team), "<br/>")`
+  `r ifelse((!is.null(inside_cover$project_code) || !is.null(inside_cover$project_email)), paste("For More Information:<br/><p style=''font-weight: 400;margin-left: 30px;padding-left: 90px;text-indent: -90px;''>"), "<br/>")`
+  `r ifelse(!is.null(inside_cover$project_code), paste("Project Code:", inside_cover$project_code), "<br/>")`
+  `r ifelse(!is.null(inside_cover$project_email), inside_cover$project_email, "<br/>")`
+  `r ifelse((!is.null(inside_cover$project_code) || !is.null(inside_cover$project_email)), "</p>", "<br/>")`
+  <br/>
+  Acknowledgements:
+  <br/>
+  <p>
+  `r ifelse(is.null(inside_cover$acknowledgements), inside_cover$client_organization, inside_cover$acknowledgements)`
+  </p>
+  <br/>
+  Suggested Citation:
+  <br/>
+  <p style=''padding-left: 25px; text-indent: -25px;''>
+  The National Center for the Improvement of Educational Assessment (`r ifelse(is.null(rmarkdown::metadata$date), format(Sys.time(), format = "%Y"), strsplit(rmarkdown::metadata$date, " ")[[1]][2])`). `r rmarkdown::metadata$title`. Submitted to `r inside_cover$client_organization`, `r inside_cover$client_city`, `r inside_cover$client_state`.
+  </p>

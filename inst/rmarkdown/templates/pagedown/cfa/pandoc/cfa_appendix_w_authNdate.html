@@ -180,12 +180,27 @@ $title$</h1>
 $if(subtitle)$
 <h1 class="subtitle"><span>$subtitle$</span></h1>
 $endif$
+$if(date)$
+<h2 class="date">$date$</h2>
+$endif$
+$if(author)$
+$for(author)$
+$if(author.name)$
+<h2 class="author">$author.name$$if(author.affiliation)$, $author.affiliation$<br/>$endif$</h2>
+$if(author.email)$
+<a class="author-email" href="mailto:#">$author.email$</a>
+</address>
+$endif$
+$else$
+<h2 class="author">$author$</h2>
+$endif$
+$endfor$
+$endif$
 </div>
 
 $if(abstract)$
 <div class="abstract">
 <h3 class="abstract">$if(abstract-title)$$abstract-title$$else$Abstract$endif$</h3>
-<br><br />
 $abstract$
 </div>
 $endif$
