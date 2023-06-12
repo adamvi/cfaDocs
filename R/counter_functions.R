@@ -67,7 +67,7 @@ setCounters <- function(tbl.counter=0, fig.counter=0, eqn.counter=0) {
 #' @rdname tblNum
 #' @export
 
-tblNum <- function(advance.counter=0) {
+tblNum <- function(advance.counter = 0) {
   if (!is.null(getOption("table_num_str"))) {
     return(sprintf(getOption("table_num_str"), getOption("table_number")+advance.counter))
   }
@@ -91,7 +91,7 @@ tblNum <- function(advance.counter=0) {
 #' @rdname figNum
 #' @export
 
-figNum <- function(advance.counter=0) {
+figNum <- function(advance.counter = 0) {
   if (!is.null(getOption("fig_num_str"))) {
     return(sprintf(getOption("fig_num_str"), getOption("fig_caption_no")+advance.counter))
   }
@@ -153,8 +153,8 @@ figNumIncrement <- function(advance.counter=1) {
 #'   \code{options("table_number")} in order to keep track of the current
 #'   number.  Also increases the table number BEFORE processing the caption
 #'   using \link{tblNumIncrement}.
-#' @param caption.text PARText string to be used for caption.  If NULL, no
-#'   caption is returned, but the table counter is advanced.AM_DESCRIPTION.
+#' @param caption.text Text string to be used for caption.  If NULL, no
+#'   caption is returned, but the table counter is advanced.
 #'   Default: NULL
 #' @param advance.counter Numeric. Number to be added to the present table
 #'   number.  Default is 1, advancing table count by 1.
