@@ -4,24 +4,25 @@
   #     - `prefix` is defined in the function `w_paper_paged`
   #     - manually define if available as YAML variable/meta-data
   if (!exists("prefix")) {
+    #  e.g., "R" for "Appendix R" (or "A", "B", "R session", etc.)
     prefix <- rmarkdown::metadata$`appendix-prefix`
   }
   
   cfaDocs::setCounters()
   options(table_counter = FALSE)
   options(table_num_str = paste0(prefix, "%d")) # Prepend Appendix Letter when using tblNum()
-  options(table_counter_str = paste0("**Table ", prefix, "%s:**")) # "**Table A%s:**"
+  options(table_counter_str = paste0("**Table ", prefix, "%s:**")) # "**Table R%s:**"
   options(fig_num_str = paste0(prefix, "%d")) # Prepend Appendix Letter when using figNum()
-  options(fig_caption_no_sprintf = paste0("**Figure ", prefix, "%d:** %s")) # "**Figure A%d:** %s"
+  options(fig_caption_no_sprintf = paste0("**Figure ", prefix, "%d:** %s")) # "**Figure R%d:** %s"
 ```
 
 # Computational Environment
 
 Since `R` and `R` packages are constantly evolving, it is critical to document
-information such as software package versions (primary and auxilary) and the
-computer system platform used in data analyses and report generation. This
-appendix provides the `R` and system specifications used in the creation of
-this report.
+information such as software package and library versions (primary and auxilary)
+and the  computer system platform used in data analyses and report generation.
+This appendix provides the `R` and system specifications used in the creation
+of this report.
 
 ##  General `R` software and system information
 
@@ -41,8 +42,7 @@ this report.
 
 ##  Attached and loaded `R` packages
 
-The following packages (non-base `R`) were attached:
-
+The following (non-`base` `R`) packages were attached:
 
 ```{r r-session-packages, echo = FALSE}
   trim_source <- function(txt){
@@ -80,7 +80,8 @@ The following packages (non-base `R`) were attached:
 
 <br/>
 
-In addition to the attached packages in the table above, the following packages were loaded via a namespace (and not attached):
+In addition to the attached packages in the table above, the following
+packages were loaded via a namespace (and not attached):
 
 ```{r r-session-nmspc-pkgs, results = "asis", echo = FALSE}
   cat(
