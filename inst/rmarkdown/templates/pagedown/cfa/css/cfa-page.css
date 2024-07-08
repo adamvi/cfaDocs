@@ -152,6 +152,13 @@ img.logo_abstract {
   width: 25%;
 }
 
+/*
+svg.logo_abstract {
+  margin: 0 auto;
+  display: block;
+}
+*/
+
 /* green rectangle */
 img.color_rect_abstract {
   margin: 0 auto;
@@ -162,6 +169,16 @@ img.color_rect_abstract {
   top: 20px;
   left: -110px;
 }
+/*
+svg.color_rect_abstract {
+  margin: 0 auto;
+  display: block;
+  height: 200px;
+  max-width: 100px;
+  position: absolute;
+  left: -100px;
+}
+*/
 
 /* remove the h3 title "Abstract" */
 h3.abstract {
@@ -261,8 +278,9 @@ h3.abstract {
 /* to remove the bullets + cut the dots at the end --> took it back from default.css */
 .toc ul, .lof ul, .lot ul {
     list-style: none;
-    padding-left: 0;
     overflow-x: hidden;
+    padding-left: 20px;
+    text-indent: -20px;
     text-align: left;
 }
 

@@ -61,10 +61,10 @@ h2.date {
   border-bottom: 1px solid #279F27;
   margin-left: 40%;
   margin-right: -20%;
-  margin-top: .75cm;
-  margin-bottom: .75cm;
+  margin-top: 20pt;
+  margin-bottom: 20pt;
   text-align: left;
-  line-height: 3.5;
+  line-height: 2.5;
 }
 
 h2.author {
@@ -74,7 +74,7 @@ h2.author {
 /*  color: #FF0000; */
   color: #279F27;
   margin-left: 40%;
-  margin-top: 15px;
+  margin-top: 20px;
   text-align: left;
   line-height: 0.5;
 }
@@ -208,7 +208,9 @@ td {
 img {
   max-width: 100%;
 }
-
+svg {
+  max-width: 100%;
+}
 /* -------------------- Captions ----------------------- */
 p.caption {
   /* text-transform: uppercase; */
