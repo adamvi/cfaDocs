@@ -1,5 +1,5 @@
 #' @title createReportScripts
-#' @description Create parent .Rmd and auxilary files for rendering
+#' @description Create parent .Rmd and auxiliary files for rendering
 #'  CFA themed reports.
 #' @param params List. A named list with parameter elements to be turned into
 #'  YAML and RMD master/parent files in the creation of a CFA report.

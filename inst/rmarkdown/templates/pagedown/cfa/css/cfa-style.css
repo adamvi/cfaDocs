@@ -1,5 +1,5 @@
 /* -------------------------------------------- */
-/*      CSS : styles of the nciea template      */
+/*       CSS : styles of the cfa template       */
 /* -------------------------------------------- */
 
 /* ----------------- Fonts --------------------- */
@@ -308,6 +308,25 @@ blockquote {
 
 code {
   hyphens: none;
+  /* font-style: italic; */
+  font-family: 'Courier New';
+  font-weight: 595; /* big jump at 600? */
+  color: forestgreen; /* #279F27; */
+}
+h1 code {
+  font-size: larger;
+  font-weight: 600;
+}
+h2 code {
+  font-size: larger;
+  font-weight: 600;
+}
+h3 code {
+  font-size: larger;
+  font-weight: 600;
+}
+h4 code {
+  font-size: larger;
 }
 
 /* pre */
