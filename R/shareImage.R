@@ -46,7 +46,7 @@ shareImage = function(
     if (is.null(path_image)) {
       out.dir <- dirname(slides_rmd)
       out.fname <- paste0(
-          sub(pattern = "(.*)\\..*$", replacement = "\\1", basename(slides_rmd)), 
+          sub(pattern = "(.*)\\..*$", replacement = "\\1", basename(slides_rmd)),
           "_share_image.png")
       out.fname <- file.path(out.dir, out.fname)
     } else {
