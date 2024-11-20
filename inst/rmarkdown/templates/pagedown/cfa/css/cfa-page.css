@@ -273,6 +273,7 @@ h3.abstract {
 .toc a, .lof a, .lot a{
   line-height: 30px;
   text-decoration: none;
+  padding-right: 12.5px;
 }
 
 /* to remove the bullets + cut the dots at the end --> took it back from default.css */
@@ -280,12 +281,14 @@ h3.abstract {
     list-style: none;
     overflow-x: hidden;
     padding-left: 20px;
+    padding-right: 25px; /* offset for margin-right: -20px in .lot a::after in cfa-default.css */
     text-indent: -20px;
     text-align: left;
 }
 
 .toc li li, .lof li li, .lot li li {
-  padding-left: 1em;
+  /* padding-left: 1em; */
+  font-style: italic;
 }
 
 /* here each level contain the following one so we have to override the properties */
@@ -294,7 +297,7 @@ h3.abstract {
   font-weight: 500;
 }
 
-/* second level and more */
+/* second level */
 .toc ul > li > ul > li > a {
   font-weight: 300;
 }
