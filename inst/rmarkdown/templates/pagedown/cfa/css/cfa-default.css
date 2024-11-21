@@ -97,6 +97,8 @@
   /* content: leader(dotted) target-counter(attr(href), page); */
   content: target-counter(attr(href), page);
   float: right;
+  text-align: right;
+  margin-right: -25px; /* offset of padding-right: 20px .lof/.lot ul in cfa-page.css */
 }
 .toc a.front-matter-ref::after, .lot a.front-matter-ref::after, .lof a.front-matter-ref::after {
   /* content: leader(dotted) target-counter(attr(href), page, lower-roman); */
@@ -108,8 +110,7 @@
   width: 0;
   white-space: nowrap;
   text-indent: 30px;
-  content: "................................................................................................................................................................."
-/*  content: "...........................................................................................................................................................................................................";  */
+  content: "..............................................................................................................................................................";
 }
 
 /* ------------------------- Chapter name -------------------- */
