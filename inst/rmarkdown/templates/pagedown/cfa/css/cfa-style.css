@@ -254,6 +254,7 @@ table {
 /* ----------------- List style ------------------- */
 ul, ol {
   list-style-type: disc;
+  font-size: 11pt;
   font-weight: 300;
   text-align: justify;
 }
@@ -292,6 +293,12 @@ span.footnote {
 }
 
 /* --------------------- Misc --------------- */
+
+sup {
+  font-style: italic;
+  font-size: x-small;
+}
+
 abbr {
   text-decoration: none;
 }

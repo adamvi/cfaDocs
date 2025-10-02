@@ -75,12 +75,17 @@ html {
 
 /* Front page or title page */
 .front-page {
-  counter-reset: page -1;
+  /* counter-reset: page -1; */
+  counter-set: page;  /* change for Chrome post version 125 */
 }
 
 /* page breaks; aka CSS fragmentation */
 .level1 {
   break-before: page;
+}
+/* reset page numbering for main content */
+.main .level1:first-child h1 {
+  counter-reset: page 1;
 }
 
 .section > h1, .section > h2, .section > h3, .section > h4, .section > h5, .section > h6 {
@@ -94,10 +99,6 @@ html {
   break-inside: avoid;
 }
 
-/* reset page numbering for main content */
-.main .level1:first-child h1 {
-  counter-reset: page 1;
-}
 
 /* do not break captions */
 caption {
@@ -209,9 +210,18 @@ h3.abstract {
       font-weight: bold;
   }
 }
-
+@page frontmatter:first {
+  counter-set: page;
+}
+@page frontmatter:first {
+  @bottom-center {
+    content: none;
+  }
+}
 .pagedjs_frontmatter_first_page {
-  display:none;
+  /* display:none; */
+  position: absolute;
+  left: -9999px;
 }
 
 /* ---------------------- Main Content ----------------- */
@@ -231,9 +241,23 @@ h3.abstract {
   }
 }
 
-.pagedjs_maincontent_first_page {
-  display:none;
+@page maincontent:first {
+  counter-set: page 1;
 }
+
+
+@page maincontent:first {
+  @bottom-center {
+    content: none;
+  }
+}
+
+.pagedjs_maincontent_first_page {
+/* display: none; */
+  position: absolute;
+  left: -9999px;
+}
+
 
 /* ---------------------- Last page ----------------- */
 /* last page or back cover */

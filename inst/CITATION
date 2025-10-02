@@ -3,11 +3,11 @@ citHeader("To cite package 'cfaDocs' in publications use:")
 citEntry(entry = "Manual",
          title        = "{cfaDocs}: Content Creation and Development Via R.",
          author       = personList(as.person("Adam R. Van Iwaarden"), as.person("Damian W. Betebenner")),
-         year         = "2022",
-         note         = "R package version 0.0-1.11",
+         year         = "2025",
+         note         = "R package version 0.0-1.16",
          url          = "https://centerforassessment.github.io/cfaDocs/",
 
-         textVersion  = paste("Adam R. Van Iwaarden and Damian W. Betebenner (2022).",
+         textVersion  = paste("Adam R. Van Iwaarden and Damian W. Betebenner (2025).",
                         "Literasee: Content Creation and Development Via R.",
-                        "(R package version 0.0-1.11)",
+                        "(R package version 0.0-1.16)",
                         "URL: https://centerforassessment.github.io/cfaDocs/"))

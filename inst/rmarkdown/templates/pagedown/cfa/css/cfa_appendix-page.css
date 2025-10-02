@@ -75,7 +75,7 @@ html {
 
 /* Front page or title page */
 .front-page {
-  counter-reset: page 0;
+  counter-set: page 0;
 }
 
 /* page breaks; aka CSS fragmentation */
