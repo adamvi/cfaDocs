@@ -361,6 +361,17 @@ h3.abstract {
   break-after: avoid;
 }
 
+.breakbefore {
+ page-break-before: always;
+}
+.breakafter {
+ page-break-after: always;
+}
+.breakboth {
+  page-break-before: always;
+  page-break-after: always;
+}
+
 /* --------------------- Columns ------------------- */
 .left-column {
   float: left;
